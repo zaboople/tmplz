@@ -163,7 +163,7 @@
   <target name="dist.src" depends="clean">  
     <mkdir dir="${dist.dir}"/>
     <zip destfile="dist/${dist.prefix}.src.zip">
-      <zipfileset dir="." prefix="${dist.prefix}.src"/>
+      <zipfileset dir="." prefix="${dist.prefix}.src" excludes=".git/**/*,.git"/>
     </zip>
   </target>
 
