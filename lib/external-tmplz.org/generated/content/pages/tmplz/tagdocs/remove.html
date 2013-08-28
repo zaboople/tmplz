@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz Tags: Include Tags: Remove</title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Tmplz&nbsp;Tags</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="coretags.html">Core Tags</a>
+      <ul class="toc">
+        <li class="toc">
+          <a href="slot.html"><b>Slot</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="section.html"><b>Section</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="includetags.html">Include Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="include.html"><b>Include</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="fillin.html"><b>Fillin</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="show.html"><b>Show</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="rename.html"><b>Rename</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="remove.html"><b>Remove</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="extratags.html">Extra Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="between.html"><b>Between</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="tagwith.html"><b>TagWith</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="trim.html"><b>Trim</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="attrsection.html"><b>AttrSection</b></a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>Include Tags: Remove</h2>
+  <p>
+    The Remove tag can remove Slots and Sections from an included template. Although not absolutely essential, it can help eliminate clutter in templates and slightly improve their performance. Example:
+  </p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Remove Section X]
+    [$Remove Slot Y]
+  [$Include]</b></pre>
+  <p>The template above assumes that foo.html has a top-level Section named X, and a top-level Slot named Y, and removes both of them. The original foo.html is unaffected; the changes are only made to the copy included into the current template. </p>
+
+  <h3>Removing tags after showing them</h3>
+  <p>As noted earlier, <a href="show.html#destruct">Show does not "destroy" the Section</a>. The Remove tag can be used after a Show to prevent the original Section from appearing in the final template. In the following example, Section X is shown twice, then removed:
+  </p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Show X][$Fillin Y]</b>Hello<b>[$Fillin][$Show]
+    [$Show X][$Fillin Y]</b>World<b>[$Fillin][$Show]
+    [$Remove Section X]
+  [$Include]</b></pre>
+  <p>If one attempted to add another <code><b>[$Show X]</b></code> <i>after</i> the <code><b>Remove</b></code> tag above, Tmplz would generate an error.</p>
+
+  <h3>"Slot" and "Section" Are Optional</h3>
+  <p>Like <a href="rename.html#optional">Rename</a>, Remove does not have to specify whether it is removing a Slot or Section. If a Section and a Slot have the same name, a single Remove tag can remove both. Example:</p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Remove X]
+  [$Include]</b></pre>
+
+
+  <a name="order"></a>
+  <h3 id="orderHeading">Order of Remove tags</h3>
+  <p>As with <a href="fillin.html#order">Fillin</a>, <a href="show.html#order">Show</a> &amp; <a href="rename.html#order">Rename</a>, Remove tags do not have to appear in the same order as the Slots and Sections they rename. Show and/or Fillin tags that follow the Remove cannot reference the removed element, however.</p>
+
+  <h3>"Deep" Removes</h3>
+  <p>This works much like deep <a href="fillin.html#deep">Fillin</a>, <a href="show.html#deep">Show</a> &amp; <a href="rename.html#deep">Rename</a>. To remove a Section or Slot that is buried several levels deep within a template, just separate the parent tags with "." characters:</p>
+  <pre>
+  <b>[$Remove Slot S1.S2.S3.S4]</b></pre>
+  <p>In the above example, S1, S2 &amp; S3 are Sections, and S4 is a Slot. Only S4 will be removed.</p>
+
+ <p class="DocBottomNav">         Next page: <a href="extratags.html">Remove</a>
+ </p>       </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+
+  

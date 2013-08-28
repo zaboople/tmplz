@@ -1,0 +1,193 @@
+  /***********************/
+  /** STANDARD ITEM CSS **/
+  /***********************/
+  img {
+    padding:0px;
+    margin:0px;
+  }
+
+  /** Body: **/
+  body {
+    padding:0px;
+    margin:0px;
+    font-family: "Verdana", "Helvetica", "Arial", "sans serif";
+    font-size: 11px;
+    background-color:white;
+  }
+
+
+  /** Header Tag Fonts **/
+  h1 {
+    font-size: 18px; color: black;
+  }
+  h2 {
+    font-size: 14px; color: #202020;
+  }
+  h3 {
+    font-size: 12px; color: #404040;
+  }
+  h4 {
+    font-size: 11px; color: #606060;
+  }
+
+
+    
+  /** Standard Margins: **/
+  ul {
+    padding:0px 0px 0px 30px;
+    margin:10px 0px 10px 0px;
+  }
+  li {
+    padding-left:0px;
+    padding-top:2px;
+    margin:0px;
+    list-style-image: url(../../images/bullet1.png); 
+  }
+  h1 {
+    margin-top: 0.3em;
+    margin-bottom:0.3em;
+  }
+  h2 {
+    margin-top: 0.3em;
+    margin-bottom:0.3em;
+  }
+  h3,h4 {
+    margin-top: 0.9em;
+    margin-bottom:0px;
+  }
+  ol, p {
+    margin-top:0.3em;
+    margin-bottom:0.3em;
+  }
+  pre {
+    margin-top:0.1em;
+    margin-bottom:0.1em;
+  }
+  blockquote {
+    padding:0px;
+    margin: 2px 0px 4px 10px;
+  }
+
+
+  /** Anchors: **/
+  a {
+    text-decoration: none;
+    color:#5050A0;
+    font-weight: bold;
+  }
+  a:hover, a:active {
+    text-decoration: underline;
+  }
+
+  /** Font style/size for code/pre **/
+  code a, a code {
+    color:#303090;
+    font-weight:bold;
+    font-family:monospace;
+  }
+  code,pre {
+    color: #cc7700;
+  }
+  b code, code b,pre b{
+    color: #993333;
+  }
+  pre {
+    padding-top:2px;
+  }
+
+  /*********************/
+  /** CUSTOM ITEM CSS **/
+  /*********************/
+  div#TmplzIntro {
+    font-size:1.1em;
+  }
+
+  /** Header */
+  div.SiteHeader{
+    padding: 10px; 
+    vertical-align:middle; 
+    background-color:#C03355;
+    font-size:1.5em; 
+    font-weight:normal;
+  }
+  div.SiteHeader a{
+    color:white;
+    font-weight:normal;  
+  }
+
+  div.SiteSubHeader{
+    padding: 3px 0px 3px 12px; 
+    vertical-align:middle; 
+    font-size:1.1em; 
+    font-weight:normal;
+    color:white; 
+  }
+  div.SiteSubHeader.Tmplz {
+    background-color:#4080A0;
+  }
+  div.SiteSubHeader.PDFRpt {
+    background-color:#70B070;
+  }
+  div.SiteSubHeader a{
+    color:white; 
+    font-weight:normal;  
+  }
+
+
+  /** Documentation page layout: **/
+  table.DocPageLayout {
+    height:100%;
+  }
+  table.DocPageLayout td.TOC { 
+    border-right:solid; border-width:1px; padding-right:10px; border-color:#CCCCCC; height:100%; 
+  }
+  table.DocPageLayout td.DocBody { 
+    padding-left:15px; height:100%;
+  }
+  
+  /** Documentation Table of contents **/
+  table.DocPageLayout ul.toc {
+    margin:0px;
+    padding:0px;
+  }
+  table.DocPageLayout li.toc a {
+    font-weight:normal;
+  }
+  table.DocPageLayout li.toc {
+    list-style-type: none;
+    padding: 2px 0px 0px 8px;
+    white-space:nowrap;
+    list-style-image: none;
+  }
+
+  /** Documentation bottom right navigation **/  
+  table.DocPageLayout p.DocBottomNav {
+    border-width:1px 0px 1px 0px; border-style:solid none solid none; padding:7px; border-color:#CCCCCC; 
+    margin-bottom:0px; margin-top:29px; vertical-align:bottom;
+  }
+  
+  /** For the tagwith page **/
+  table.TagWithBuiltIns  {
+    margin-left:20px;
+    border-style:solid;
+    border-color:#D0D090;
+    border-width:1px 0px 0px 1px;
+  }
+  table.TagWithBuiltIns th {
+    color:#606030;
+  }
+  table.TagWithBuiltIns td, table.TagWithBuiltIns th
+  {
+    padding:3px;
+    border-style:solid;
+    border-color:#D0D090;
+    border-width:0px 1px 1px 0px;    
+  }
+  table.TagWithBuiltIns td.code{
+    font-family: monospace;
+  }
+  table.TagWithBuiltIns th {
+    text-align:left;
+  }
+  
+  

@@ -1,0 +1,11 @@
+This is template.html. I will include included.html twice:
+  [$Include included.html]
+    [$ShowFoo/]
+    [$Fillin Anchor]FilledInFromTemplate.html 1[$Fillin]
+  [$Include]
+  [$Include included.html]
+    [$Fillin Anchor]FilledInFromTemplate.html 2[$Fillin]
+  [$Include]
+
+Still in template.html, now including IncludedManyTimes.html:
+  [$Include IncludedManyTimes.html][$Include][$Include IncludedManyTimes.html][$Include][$Include IncludedManyTimes.html][$Include]

@@ -1,0 +1,13 @@
+Welcome to include1.html; I am going to include include2.html and rename SlotTest1, SlotTest2 and SlotTest3 as Bar; then Section Test4 as Test4New.
+[$Include "include2.html" "MAIN"]
+  [$Rename Test1 Bar]
+  [$Show Test2]
+    [$Rename Slot Test2 Bar]
+  [$Show]
+  [$Rename Section Test3 Bash]
+  [$Rename Bash."Test3" "MySlot"] 
+  [$Show Test4/]
+  [$Rename Test4 Test4New]
+  [$Show Test4New/]
+  [$Rename Slot Test5.Test5a.Test5aa.Test5aaa Mess]
+[$Include]

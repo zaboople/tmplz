@@ -1,0 +1,16 @@
+This is template.html; I will now included include.html and show Sections 
+  Foo  -> Deep2.x.x.x -> Deep3.y.y.y -> Deep4
+  Foo2 -> Foo2.1
+[$Include include.html]
+  [$Show Foo]
+    [$Show "Deep2.x.x.x"]
+      [$Show "Deep3.y.y.y"]
+        [$Show "Deep4"/]
+      [$Show]
+    [$Show]
+  [$Show]
+  [$Show Foo2]
+    [$Show "Foo2.1"/]
+  [$Show]
+[$Include]
+

@@ -1,0 +1,13 @@
+
+  Welcome to include.html:
+  [$Section "Foo"]
+    This is Section Foo, with Slot Bar: [$SlotBar]
+  [$Section] 
+  [$AttrSection "Foo" class]
+  [$AttrSection "Foo" id]
+  <div id="[$SlotBar]" class="[$SlotBar]">The class and id attributes here are both Section Foo, with values of Slot Bar</div>
+  [$Section "Foo"]
+    This is Section Foo but it does not have any Slots.
+  [$Section] 
+  
+  include.html says, "goodbye".

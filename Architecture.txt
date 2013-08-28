@@ -1,0 +1,22 @@
+TemplateManager
+  -> Gets templates from TemplateSource, which it keeps in a cache
+  -> Instantiates TextLoadMgr cache, passes it to TextSourceMgr
+  
+TemplateSource
+  -> Tracks the current version of a template
+  -> Gets template text updates from TextSource
+  
+TextSource
+  -> Tracks the entire include-hierarchy of a template and its overall last-modified timestamp
+  -> One to one with a template
+  -> Gets template text from TextLoadMgr
+  -> Gets included TextSource instances from TextSourceMgr
+  
+TextSourceMgr
+  - Maintains a cache of Path->TextSource instances.
+  - Creates new TextSource instances, requested by TemplateSource and TextSource.
+  
+TextLoadMgr
+      -> Provides included template text
+      -> Gets template text from TextLoadMgr
+      -> Resolves relative paths via

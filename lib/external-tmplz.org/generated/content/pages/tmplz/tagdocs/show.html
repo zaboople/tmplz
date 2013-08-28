@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz Tags: Include Tags: Show</title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Tmplz&nbsp;Tags</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="coretags.html">Core Tags</a>
+      <ul class="toc">
+        <li class="toc">
+          <a href="slot.html"><b>Slot</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="section.html"><b>Section</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="includetags.html">Include Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="include.html"><b>Include</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="fillin.html"><b>Fillin</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="show.html"><b>Show</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="rename.html"><b>Rename</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="remove.html"><b>Remove</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="extratags.html">Extra Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="between.html"><b>Between</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="tagwith.html"><b>TagWith</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="trim.html"><b>Trim</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="attrsection.html"><b>AttrSection</b></a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>Include Tags: Show</h2>
+  <p>
+    The Show tag "shows" a Section from an included template. It must always appear inside of an Include tag. Consider the following template, in a file named "list.html", which provides a basic HTML unordered list:
+  </p>
+  <pre>
+  &lt;ul&gt;
+    <b>[$Section Item]</b>&lt;li&gt;<b>[$Slot Value]</b>&lt;/li&gt;<b>[$Section]</b>
+  &lt;/ul&gt;</pre>
+  <p>Using the above template, the next template uses Show and Fillin tags to create a list:</p>
+  <pre>
+  <b>[$Include list.html]
+    [$Show Item]
+      [$Fillin Value]</b>First value.<b>[$Fillin]
+    [$Show]
+    [$Show Item]
+      [$Fillin Value]</b>Second value.<b>[$Fillin]
+    [$Show]
+  [$Include]</b></pre>
+  <p>The result looks like this:</p>
+  <pre>
+  &lt;ul&gt;
+    &lt;li&gt;First Value.&lt;/li&gt;
+    &lt;li&gt;Second Value.&lt;/li&gt;
+  &lt;/ul&gt;</pre>
+  <p>Note how the original Section is shown twice; after the first Show, additional Shows cause the Section to append a copy of itself to itself. </p>
+  <p>Also note the use of nested Fillin tags; the Show tag can contain any tag that an Include tag may contain, i.e. <a href="fillin.html">Fillin</a>, <a href="rename.html">Rename</a>, <a href="remove.html">Remove</a>, and even Show itself. Consider the following example, where Section x2 rests within Section x1 in x.html:
+  </p>    
+  <pre>
+  <b>[$Include x.html]
+    [$Show x1]
+      [$Show x2/]
+    [$Show]
+    [$Show x1]
+      [$Show x2/][$Show x2/]
+    [$Show]
+  [$Include]</b></pre>
+
+
+  <h3>Self-closing Show Tags</h3>
+  <p>Obviously if a Show element contains nested tags, a closing Show tag is needed. When there are no nested tags, however, it is annoying to have to type a closing tag; therefore a Show can close itself using a "/" (just like XML and HTML):</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show Foo/]
+  [$Include]</b></pre>
+  <p>This syntax <i>cannot</i> be used with any other tags; the parser can already recognize whether they are self-closing without the "/" hint.</p>
+
+
+  <a name="order"></a>
+  <h3 id="orderHeading">Order of Show statements</h3>
+  <p>As is the case with <a href="fillin.html#order">Fillin</a>, the order of Show tags does not have to match the order of Section tags in the included document. For example, this: </p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show A/][$Show B/]
+  [$Include]</b></pre>
+  <p>does the same thing as this (B,A instead of A,B):</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show B/][$Show A/]
+  [$Include]</b></pre>
+
+  <a name="destruct"></a>
+  <h3 id="destructHeading">Show does not "destroy" the Section</h3>
+  <p>Unlike the Fillin tag, which <a href="fillin.html#destroy">"destroys"</a> its corresponding Slot, the Show tag leaves the original Section intact so that it can be shown again later. To remove a Section, use the <a href="remove.html">Remove</a> tag.
+
+  <a name="deep"></a>
+  <h3 id="deepHeading">"Deep" Shows</h3> 
+  <p>This works very similar to <a href="fillin.html#deep">deep Fillins</a>. Example:</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show x1.x2/]
+  [$Include]</b></pre>
+  <p>In the above example, Section x2 is shown, but x1 is not, on the assumption that something else will show x1 later on. Contrast this behavior with the earlier example of nested show tags, where both Section x1 &amp; x2 become visible; here, only Section x2 is visible, and only after x1 is shown by something else.</p>
+
+
+  
+ <p class="DocBottomNav">         Next page: <a href="rename.html">Rename</a>
+ </p>       </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+
+  

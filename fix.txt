@@ -1,0 +1,22 @@
+IMMEDIATE:
+
+MEDIUM:
+-I think remove and rename should allow closing /. It won't hurt anything.
+-ShowRemove tag
+-RemoveSections tag
+-[$Comment] Tag? Would need to make sure to auto-trim them.
+-Put in AttrSlot again? We need it for the <body> tag, so that we can inject random javascript.
+  AttrSlot names the element, not the attribute.
+-Make apps.SiteGenerator into a bona fide ant task.
+-Macros: It would be really nice to have a single file that you could include, and then you grab widgets as macros. 
+   BTW it would be nice to resolve relative paths to the included file, but ugh.
+  [Define Macro P As]
+     [Include foo.html] HEY maybe this could do the include when the define is eval'd, then the Include is relative to the macro definition.
+  [Define]
+  [Macro P]
+    [FillinText]La la la la.[FillinText]
+  [Macro P]
+
+LOW:
+-GZIP in ContentViewer application.
+-Make Includes do auto-indent? The text included would indent to position of the include.

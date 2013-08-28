@@ -1,0 +1,11 @@
+<html>
+  <body>
+  For internal use.  This contains the classes that Tmplz uses to parse html template files. There are four steps in parsing a template:
+  <ol>
+    <li>The template is converted from text to Tokens by the DocumentTokenizer, in the tokenize package.
+    <li>The tokens are converted into "dum" nodes by the DocumentBuilder.
+    <li>The dum nodes are "preprocessed" by the Preprocessor.
+    <li>The dum nodes are turned into a Section by the TemplateBuilder.
+  </ol>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz - Getting Started: Introduction </title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Getting&nbsp;Started</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="TemplateManager.html">TemplateManager</a>
+    </li>
+    <li class="toc"> 
+      <a href="Section.html">Section</a>
+    </li>
+    <li class="toc"> 
+      <a href="Additional.html">Additional classes &amp; things</a>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>Introduction </h2>
+  <p>This tutorial explains how to get started with Tmplz, and provides links to the most important Java classes. Fortunately there are no special XML files to configure; everything is done in Java code. The binary distribution contains two .jar files, <b>tmottecommon.jar</b> and <b>tmplz.jar</b>. These should go in the classpath of an application that will use Tmplz.</p>
+
+  <h3>Code example for the impatient</h3>
+  <p>The following obtains a template, does a few things with it, and prints it.</p>
+  <pre>
+  <b>package org.tmotte.tmplz.test;
+  import org.tmotte.tmplz.Section;
+  import org.tmotte.tmplz.TemplateManager;
+  import org.tmotte.tmplz.load.builtin.FileTextLoaderFactory;
+  public class DocExample {
+    public static void main(String[] args) {
+      TemplateManager templateMgr=new TemplateManager();
+      templateMgr.getTextLoadMgr().register(new FileTextLoaderFactory());
+      Section template=templateMgr.getTemplate("test.html");
+      for (int i=0; i<5; i++){
+        Section s=template.show("item");
+        s.fillin("number", i);
+      }
+      template.appendTo(System.out);
+    }
+  }</b></pre>
+  <p>For the above example to work, the source code for <code>test.html</code> could look something like this:</p>
+<pre>
+  Here are some numbers: 
+    <b>[$Section item]</b>&lt;p&gt;<b>[$Slot number]</b>&lt;/p&gt;<b>[$Section]</b></pre>
+  <p>For a more in-depth explanation, read on.</p>
+
+ <p class="DocBottomNav">         Next page: <a href="TemplateManager.html">TemplateManager</a>
+ </p> 
+  
+      </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+

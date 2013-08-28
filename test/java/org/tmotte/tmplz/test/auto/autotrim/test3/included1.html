@@ -1,0 +1,16 @@
+
+  This is included1.html. I will include included2.html five times; that template
+  has only a simple one-line <input> tag: 
+
+    These two rename "name" and "value":
+    [$Include included2.html][$Rename name type1][$Rename value type1Val][$Include]
+    [$Include included2.html][$Rename name type2][$Rename value type2Val] [$Include]  
+
+    This include does not back up to the beginning of the line because it has an end tag
+    (slots should be empty because they are not renamed to what parent template expects):
+    [$Include included2.html][$Include]  
+
+    These two, however, do back up to the beginning of the line, because they don't have end tags. Whatever,
+    I don't see where you would do many single line includes like this. You almost always fillin/show/rename something.
+    [$Include included2.html]
+    [$Include included2.html]

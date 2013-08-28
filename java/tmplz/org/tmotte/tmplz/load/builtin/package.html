@@ -1,0 +1,17 @@
+<html><body>
+<p><b>Implements several useful versions of TextLoader and TextLoaderFactory</b>. These can load from any of:
+<ul>
+  <li>A File</li>
+  <li>A URL</li>
+  <li>A ServletContext</li>
+  <li>A ClassLoader (i.e. the class path)</li>
+</ul>
+<p>
+<b>Known issue:</b> ClassLoaderTextLoaderFactory &amp; ServletContextTextLoaderFactory use java.net.URL, and so use <code>java.net.URLConnection.setIfModifiedSince()</code> to detect changes to template files. In such cases the JDK classes may use <code>java.text.SimpleDateFormat</code> to format timestamps; it is widely known that SimpleDateFormat instances are very expensive to create, however, causing Tmplz to run out of memory when under very heavy loads. The problem is <i>not</i> noticeable in <i>most</i> usage scenarios, but to get around it, one can do any of the following:
+<ul>
+  <li>Use <code>TemplateManager.setCheckForChanges(boolean)</code> to prevent Tmplz from checking for changes in templates. This works well for production systems where templates never change after the application boots.
+  <li>Use <code>org.tmotte.tmplz.load.builtin.FileTextLoaderFactory</code>, which uses java.io.File instead of URL, and checks for changes using <code> File.lastModified()</code>. This factory can only load directly from the file system, however.
+  <li>Write a custom TextLoaderFactory.
+</ul>
+@see org.tmotte.tmplz.TemplateManager#setCheckForChanges(boolean)
+</body></html>

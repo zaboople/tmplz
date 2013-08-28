@@ -1,0 +1,13 @@
+  ~~TagWith brackets
+  ---
+  Welcome to include.html: 
+  [AttrSection url href]
+  [AttrSection onclick]
+  This has Slot foo in href (aka url), Section OK & Slot Value in onclick:
+  <a id='ShowId' href="/normal/[Slot foo]" bingle=bongle doof="poof" onclick="[SectionOK]OK(); [Section]return '[Slot Value]...[Slot Value2];">Hi there</a>
+  
+  [AttrSection url href]
+  [AttrSection onclick]
+  This has not slots, just sections:
+  <a id='ShowId' href="/normal/href" bingle=bongle doof="poof" onclick="whatever();">Hi there</a>
+  

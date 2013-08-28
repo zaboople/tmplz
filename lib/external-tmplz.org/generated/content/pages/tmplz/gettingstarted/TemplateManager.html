@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz - Getting Started: TemplateManager</title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Getting&nbsp;Started</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="TemplateManager.html">TemplateManager</a>
+    </li>
+    <li class="toc"> 
+      <a href="Section.html">Section</a>
+    </li>
+    <li class="toc"> 
+      <a href="Additional.html">Additional classes &amp; things</a>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>TemplateManager</h2>
+  <p>Templates are obtained from a <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/TemplateManager.html">TemplateManager</a>. This class is thread-safe. It's a very "lightweight" class, but one instance can be used to obtain numerous templates. 
+
+  <a name="TextLoaderFactory"></a>
+  <h3 id="TextLoaderFactoryHeading">TextLoaderFactory</h3>
+  <p>Before use, a TemplateManager needs to be supplied with at least one <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/TextLoaderFactory.html">TextLoaderFactory</a>, an interface for classes that can load text templates to be parsed by the TemplateManager. If templates are to be loaded from a web application's own directories, a <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/builtin/ServletContextTextLoaderFactory.html">ServletContextTextLoaderFactory</a> should be supplied:</p> 
+  <pre>
+  public class MyServlet extends HttpServlet {
+
+    <b>TemplateManager templateMgr=new TemplateManager();</b>
+
+    public void init() throws ServletException {
+      <b>templateMgr.getTextLoadMgr().register(
+        new ServletContextTextLoaderFactory(getServletContext());
+      );</b>
+    }
+    ... 
+  }</pre>
+  <p>There are also built-in TextLoaderFactories for loading from the <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/builtin/FileTextLoaderFactory.html">file system</a>, the <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/builtin/ClassLoaderTextLoaderFactory.html">Java classpath</a>, and more. It's also fairly easy to write a custom one when necessary.
+  </p>
+
+
+  <h3>Obtaining a template</h3>
+  <p>Once the TemplateManager is ready, obtaining a template is trivial:</p>
+  <pre>
+  <b>Section template=templateMgr.getTemplate("templates/MyTemplate.html");</b></pre>
+  <p>If several concurrent threads ask for the same template from the same TemplateManager, each will receive its own unique copy. </p>
+  
+ <p class="DocBottomNav">         Next page: <a href="Section.html">Section</a>
+ </p> 
+      </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+

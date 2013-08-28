@@ -1,0 +1,24 @@
+~~TagWith [#,]
+This is template.html; 
+
+I will now included include.html, show url & onclick, and fill in url's "foo" slot:
+[#Include include.html]
+  [#Show url]
+    [#Fillin foo]I filled it in![#Fillin]
+  [#Show]
+  [#Show onclick]
+    [#Show OK][#Show]
+    [#Fillin Value]I filled it in![#Fillin]
+    [#Fillin Value2]Yes I did![#Fillin]
+  [#Show]
+[#Include]
+
+
+I will now included include.html and only show url, nothing else:
+[#Include include.html]
+  [#Show url][#Show]
+[#Include]
+
+
+I will now included include.html and not do any of that:
+[#Include include.html]

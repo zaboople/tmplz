@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz Tags: Introduction</title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Tmplz&nbsp;Tags</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="coretags.html">Core Tags</a>
+      <ul class="toc">
+        <li class="toc">
+          <a href="slot.html"><b>Slot</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="section.html"><b>Section</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="includetags.html">Include Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="include.html"><b>Include</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="fillin.html"><b>Fillin</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="show.html"><b>Show</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="rename.html"><b>Rename</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="remove.html"><b>Remove</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="extratags.html">Extra Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="between.html"><b>Between</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="tagwith.html"><b>TagWith</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="trim.html"><b>Trim</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="attrsection.html"><b>AttrSection</b></a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>Introduction</h2>
+    <a name="general" id="general"></a>
+    <p>Tmplz tags are used to mark up text files for processing by the Tmplz template parser, which turns them into data structures made up of <b>Slots</b> and <b>Sections</b>. This manual explains the syntax for the different tags. Below are some general rules about tag syntax.</p>	
+    <h3>General tag syntax</h3>
+    <p>A Tmplz tag looks like this:</p>
+
+    <pre>
+  <b>[$Slot Foo]</b></pre>
+    
+    <p>The <code><b>[$</b></code> marks the start of the tag, and <code><b>]</b></code> marks the end. The <code><b>Slot</b></code> part is the <i>name</i> of the tag, and the <code><b>Foo</b></code> part is a tag <i>parameter</i>; most tags allow one or more of these. Parameters may need to be <i>quoted</i>, especially when they contain spaces, e.g.:</p>
+
+    <pre>
+  <b>[$Slot "Foo Bar"]</b></pre>
+  <p>Sometimes both an opening tag and closing tag are needed; together, they form an <i>element</i> (stolen from HTML parlance).</p>
+    <pre>
+  <b>[$Section ABC]</b>...Stuff in between...<b>[$Section]</b></pre>
+  <p>A tag that stands alone (such as the <code><b>Slot</b></code> example above) is considered a self-closing element.</p>
+
+    <h3>Customizing the tag syntax</h3>
+
+    <p>If <code><b>$[</b>...<b>]</b></code> are unappealing tag delimiters, they can be changed; this is explained later on in the <a href="tagwith.html">TagWith</a> chapter. For the purposes of this document, however, we will otherwise use <code><b>[$</b>...<b>]</b></code> throughout for consistency. 
+    </p>
+  
+
+ <p class="DocBottomNav">         Next page: <a href="coretags.html">Core Tags</a>
+ </p>         
+      </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+
+
+

@@ -1,0 +1,14 @@
+[$Trim]
+  <!--~~TagWith brackets -->
+  Slot foo 1: [Slot foo]
+  [TagWith revert]
+  Slot foo 2: [$Slot foo]
+  [$TagWith ";[" "];"]
+  Slot foo 3: ;[Slot foo];
+  ;[TagWith ... ...];
+  Slot foo 4: ...Slot foo...;  
+  <!--~~TagWith 12,34 -->
+  Slot foo 5: 12Slot foo34
+  <!--~~TagWith default -->
+
+[$Trim]  

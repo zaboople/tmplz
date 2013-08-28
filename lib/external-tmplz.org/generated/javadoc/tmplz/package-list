@@ -1,0 +1,17 @@
+org.tmotte.common.io
+org.tmotte.common.refactor
+org.tmotte.common.text
+org.tmotte.tmplz
+org.tmotte.tmplz.apps
+org.tmotte.tmplz.exception
+org.tmotte.tmplz.exception.load
+org.tmotte.tmplz.exception.parse
+org.tmotte.tmplz.exception.template
+org.tmotte.tmplz.load
+org.tmotte.tmplz.load.builtin
+org.tmotte.tmplz.node
+org.tmotte.tmplz.parse
+org.tmotte.tmplz.parse.dum
+org.tmotte.tmplz.parse.preprocess
+org.tmotte.tmplz.parse.tokenize
+org.tmotte.tmplz.util

@@ -1,0 +1,117 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz Tags: Extra Tags: Trim</title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Tmplz&nbsp;Tags</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="coretags.html">Core Tags</a>
+      <ul class="toc">
+        <li class="toc">
+          <a href="slot.html"><b>Slot</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="section.html"><b>Section</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="includetags.html">Include Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="include.html"><b>Include</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="fillin.html"><b>Fillin</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="show.html"><b>Show</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="rename.html"><b>Rename</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="remove.html"><b>Remove</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="extratags.html">Extra Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="between.html"><b>Between</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="tagwith.html"><b>TagWith</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="trim.html"><b>Trim</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="attrsection.html"><b>AttrSection</b></a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>Extra Tags: Trim</h2>
+    <p>The <b>Trim</b> tag is used to remove extra spaces and line breaks. For example, this: </p>
+    <pre>
+  <b>[$Trim]</b>
+  1
+  2
+  3
+  <b>[$Trim]</b></pre>
+    <p>
+    - will be parsed into this:
+    </p>
+    <pre>
+  1 2 3</pre>
+    <p>
+    Note that there is a single space between each of the numbers above, so the whitespace is not completely removed; rather, it is reduced to a single space character. Usually this yields the most desirable results.
+    </p>
+    <h3>Placement</h3>
+    <p>
+    The Trim tag can be used as a top level tag, within any Section, and within any Fillin. It can also be used more than once within any of these contexts.
+    </p>
+    <h3>Auto-Trim</h3>
+    <p>
+    By default Tmplz trims extra space from tags that appear on lines by themselves. This can be turned off by a programmer using the <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/TemplateManager.html#setAutoTrim%28boolean%29">TemplateManager.setAutoTrim()</a> API call.
+    </p>
+      
+ <p class="DocBottomNav">         Next page: <a href="attrsection.html">AttrSection</a>
+ </p>       </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+
+
+

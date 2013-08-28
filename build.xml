@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+
+<project name="Tmplz" basedir="." default="help">
+
+  <!--**********-->
+  <!--PROPERTIES-->
+  <!--**********-->
+
+  <!--Property files:-->
+  <property file="build.properties"/>
+  
+  <!--Properties: arbitrary environment prefix:-->
+  <property environment="env"/>
+
+  <!--Properties: directories:-->
+  <property name="src.dir" value="java"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="dist.prefix" value="Tmplz.${VERSION.TMPLZ}"/>
+  <property name="build.common.dir" value="build/common"/>
+  <property name="build.tmplz.dir" value="build/tmplz"/>
+  <property name="javadoc.dir" value="javadoc"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="test.dir" value="test"/>
+
+
+  <!--**************-->
+  <!--TARGETS: HELP -->
+  <!--**************-->
+
+  <target name="help">
+    <echo>
+    Basic targets:
+      clean        => Deletes build, dist and javadoc directories.
+                      Also cleans the "test" and "site" subprojects.      
+      compile      => Compile all Java files into build directory; builds
+                      dist/bin/tmottecommon.jar.
+      jar          => Invokes compile, then creates dist/bin/tmplz.${VERSION.TMPLZ}.jar.
+      javadoc      => Generate useful javadoc for all code, in javadoc directory
+      dist         => Generates source &amp; binary .zip distributions in dist directory.
+                      The source distribution is essentially a backup of the complete
+                      project &amp; subprojects.
+                      
+                      Also generates the files needed by the tmplz site, under dist/site. 
+                      These go in the lib/external-tmplz directory of the tmplz.org source tree.
+
+                      Note that this target requires the current generated version of
+                      the documentation from the tmplz.org site, which needs the current
+                      javadoc from tmplz first. Check the tmplz.org ant help for more info.
+     </echo>
+  </target>
+
+
+  <!--**************-->
+  <!--TARGETS: CLEAN-->
+  <!--**************-->
+
+  <target name="clean" depends="clean.local" description="Clean output directories">
+    <subant target="clean" buildpath="." antfile="test/build.xml"/>
+  </target>
+  <target name="clean.local" description="Cleans just this project, not sub-projects">
+    <delete dir="build"/>
+    <delete dir="javadoc"/>
+    <delete dir="${dist.dir}"/>
+    <delete dir="${web.dir}/WEB-INF/classes/**"/>    
+  </target>
+  
+  <!--***********************-->
+  <!--TARGETS: COMPILE & JAR -->
+  <!--***********************-->
+  
+  <target name="compile.common" description="Compile /org/tmotte/common, which is used by tmplz; generates jar file in dist.">
+    <mkdir dir="${build.common.dir}"/>
+    <mkdir dir="${dist.dir}/bin"/>
+    <javac 
+      destdir="${build.common.dir}" 
+      debug="true" 
+      deprecation="false" 
+      failonerror="true"
+      >
+      <src path="${src.dir}/common"/>
+    </javac>
+    <jar destfile="${dist.dir}/bin/tmottecommon-${VERSION.TMPLZ}.jar">
+      <fileset dir="${build.common.dir}"/>
+    </jar>        
+  </target>  
+  <target name="compile" depends="compile.common" description="Compile /org/tmotte/tmplz">
+    <mkdir dir="${build.tmplz.dir}"/>
+    <javac 
+      destdir="${build.tmplz.dir}" 
+      debug="true" 
+      deprecation="false" 
+      failonerror="true"
+      >
+      <src path="${src.dir}/tmplz"/>
+      <classpath>
+         <pathelement path="${dist.dir}/bin/tmottecommon-${VERSION.TMPLZ}.jar"/>
+         <fileset dir="${lib.dir}" includes="*.jar"/>
+      </classpath>
+    </javac>
+  </target>
+  <target name="jar" depends="compile">
+    <mkdir dir="${dist.dir}/bin"/>
+    <jar destfile="${dist.dir}/bin/tmplz-${VERSION.TMPLZ}.jar">
+      <fileset dir="${build.tmplz.dir}">
+      </fileset>
+    </jar>        
+  </target>  
+  
+
+  <!--*************************************-->
+  <!--TARGETS: DISTRIBUTION/DOCUMENTATION: -->
+  <!--*************************************-->
+
+  <target name="javadoc" description="JavaDoc" depends="compile.common,compile">
+    <mkdir dir="${javadoc.dir}"/>
+    <javadoc sourcepath="${src.dir}" 
+             destdir="${javadoc.dir}" 
+             packagenames="org.**,com.**"
+             Public="true"
+             >
+      <classpath>
+         <pathelement path="${build.common.dir}"/>
+         <pathelement path="${build.tmplz.dir}"/>
+         <fileset dir="${lib.dir}" includes="*.jar"/>        
+      </classpath>
+      <fileset dir="${src.dir}">
+        <include name="**/*.java"/>
+      </fileset>
+    </javadoc>
+  </target>
+
+  
+  <target name="dist" depends="dist.src,javadoc,dist.bin,dist.site">
+    <!--
+      Note: dist.src has to come first because it does a clean, which 
+      will wipe out the dist directory itself.
+      -->
+    <echo>
+      Web site files are in ${dist.dir}/site.
+      Source distribution is ${dist.dir}/${dist.prefix}.src.zip.
+      Binary distribution is ${dist.dir}/${dist.prefix}.zip.
+    </echo>
+  </target>
+  
+  <target name="dist.site">
+    <mkdir dir="${dist.dir}/site/"/>
+    <copy todir="${dist.dir}/site/javadoc">
+      <fileset dir="javadoc"/>
+    </copy>
+    <copy todir="${dist.dir}/site">
+      <fileset dir="${dist.dir}">
+        <include name="*.zip"/>
+      </fileset>
+    </copy>
+    <copy todir="${dist.dir}/site">
+      <fileset dir="${dist.dir}/bin">
+        <include name="*.jar"/>
+      </fileset>
+    </copy>
+    <copy todir="${dist.dir}/site" file="license.html"/>
+    <copy todir="${dist.dir}/site" file="build.properties"/>
+  </target>
+
+  <target name="dist.src" depends="clean">  
+    <mkdir dir="${dist.dir}"/>
+    <zip destfile="dist/${dist.prefix}.src.zip">
+      <zipfileset dir="." prefix="${dist.prefix}.src"/>
+    </zip>
+  </target>
+
+  <target name="dist.bin" depends="jar">
+
+    <!--Obtain the site documentation generated from tmplz.org:-->
+    <copy todir="dist/bin/docs/">
+      <fileset dir="lib/external-tmplz.org/generated"/>
+    </copy>
+    
+    <zip destfile="dist/${dist.prefix}.zip">
+      <zipfileset dir="dist/bin" prefix="${dist.prefix}"/>
+    </zip>
+  </target>
+
+
+</project>

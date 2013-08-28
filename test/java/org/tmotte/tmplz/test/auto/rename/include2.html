@@ -1,0 +1,30 @@
+[$TagWith brackets]
+[Section MAIN]
+Hello I am include2...
+  Test 1: Slot Rename: Slot Test1 will be renamed and filled in: [SlotTest1]
+  
+  Test 2: Section to show, with slot to rename: Section Test2:[Section Test2]
+    This is Slot Test2: [SlotTest2]
+  [Section]
+  
+  Test 3: onclick is Section Test3, containing Slot Test3:[Trim]
+  [AttrSection Test3 onclick]
+  <a onclick="[Slot Test3]"></a>
+  [Trim]
+
+  Test 4: Now here's a section & a slot with same name. We will rename them both, but before renaming Test4, we
+  will show it once, then rename it and show it with the new name twice:
+    Slot Test 4: [Slot Test4] 
+    Section Test4: [Section Test4] This is Section Test4 [Section]
+    
+  Test 5: Let's try deep rename
+  [Trim]
+    [Section Test5]
+      [Section Test5a]
+        [Section Test5aa]
+    Section Test5aa, Slot Test5aaa: [Slot Test5aaa]
+        [Section]
+      [Section]
+    [Section]
+  [Trim]
+[Section]

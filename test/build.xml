@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<project name="Tmplz" basedir="." default="help">
+
+  <!--**********-->
+  <!--PROPERTIES-->
+  <!--**********-->
+
+  <!--Property files:
+  <property file="build.properties"/>
+  -->
+  
+  <!--Properties: arbitrary environment prefix:-->
+  <property environment="env"/>
+  <!--property name="tomcat.home" value="${env.CATALINA_HOME}"/-->
+  
+  <!--Properties: directories:-->
+  <property name="src.dir" value="java"/>
+  <property name="web.dir" value="webapp"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="build.dir" value="build"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="webapp.name" value="cat"/>
+
+  <!--**************-->
+  <!--TARGETS: BUILD-->
+  <!--**************-->
+
+  <target name="help">
+    <echo>
+    Basic targets:
+      clean        => Deletes compiled classes from build &amp; web dirs.
+      jar.parent   => Builds tmplz distribution and copies it to lib.
+      compile      => Compile all Java files
+    </echo>
+  </target>
+
+  <!--Targets from parent distribution: -->
+  <target name="jar.parent">
+    <subant target="jar" buildpath="." antfile="../build.xml"/>
+    <copy todir="${lib.dir}" preservelastmodified="true">
+      <fileset dir="../dist/bin">
+        <include name="*.jar"/>
+      </fileset>
+    </copy>        
+  </target>  
+  <target name="clean.parent">
+    <subant target="clean.local" buildpath="." antfile="../build.xml"/>
+  </target>  
+ 
+  <target name="clean" depends="clean.parent" description="Clean output directories">
+    <delete dir="build"/>
+    <delete dir="doc"/>
+    <delete dir="${dist.dir}"/>
+    <delete file="test.jar"/>
+    <delete>
+      <fileset dir="lib">
+        <include name="*.jar"/>
+      </fileset>
+    </delete>
+  </target>
+
+
+  <target name="compile" depends="jar.parent" description="Compile main source tree java files">
+    <mkdir dir="${build.dir}/classes"/>
+    <path id="classpath">
+      <pathelement path="${build.dir}/classes"/>
+      <fileset dir="${lib.dir}" includes="*.jar"/>
+    </path>
+    
+    <javac 
+      destdir="${build.dir}/classes" 
+      debug="true" 
+      deprecation="false" 
+      failonerror="true"
+      >
+      <src path="${src.dir}"/>
+      <classpath refid="classpath"/>
+    </javac>
+    <copy todir="${build.dir}/classes" >
+      <fileset dir="java" includes="**/*.html"/>
+    </copy>
+  </target>  
+
+  <!--This is actually important for testing templates that are inside the classpath
+      in a jar file, where java has broken relative URL's.-->
+  <target name="jar" depends="compile">
+    <jar destfile="test.jar">
+      <fileset dir="${build.dir}/classes">
+      </fileset>
+    </jar>        
+  </target>  
+
+  
+</project>

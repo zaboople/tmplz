@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../.././css/styles.css">
+    <script language="javascript" type="text/javascript" src="../../.././js/tools.js"></script>
+    <title>Tmplz Tags: Core Tags: Slot</title>
+    <link rel="SHORTCUT ICON" href="../../.././../images/favicon.ico"/>
+
+  </head>
+  <body>
+    <div class="SiteHeader">
+      <a href="../../.././pages/index.html">tmplz.org</a>
+    </div>
+      <div class="SiteSubHeader Tmplz">
+        <a href="../../.././pages/tmplz/index.html">Tmplz Template API</a>
+      </div>
+    <div style="padding:8px 16px 8px 16px;">
+    <a name="top" id="top"></a>
+    <table class="DocPageLayout" cellpadding="0" cellspacing="0"><tr>
+      <td valign="top" class="TOC">
+  <h2 style="color:black;">Tmplz&nbsp;Tags</h2>
+  <ul class="toc">
+    <li class="toc"> 
+      <a href="index.html">Introduction</a>
+    </li>
+    <li class="toc"> 
+      <a href="coretags.html">Core Tags</a>
+      <ul class="toc">
+        <li class="toc">
+          <a href="slot.html"><b>Slot</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="section.html"><b>Section</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="includetags.html">Include Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="include.html"><b>Include</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="fillin.html"><b>Fillin</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="show.html"><b>Show</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="rename.html"><b>Rename</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="remove.html"><b>Remove</b></a>
+        </li>
+      </ul>
+    </li>
+    <li class="toc"> 
+      <a href="extratags.html">Extra Tags</a>
+      <ul class="toc">
+        <li class="toc"> 
+          <a href="between.html"><b>Between</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="tagwith.html"><b>TagWith</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="trim.html"><b>Trim</b></a>
+        </li>
+        <li class="toc"> 
+          <a href="attrsection.html"><b>AttrSection</b></a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+      </td>
+      <td valign="top" class="DocBody">
+        <h2>Core Tags: Slot</h2>
+    <p>
+      A <em>Slot</em> specifies a place where information will be filled in later. Example:
+    </p>
+    <pre>
+  I'm not sure how to explain this, so I'll let the computer do it: 
+  <b>[$Slot Explain]</b> ...Hope that helps.</pre>
+   <p>
+    A Slot always has a <i>name</i>; here, the name is "Explain". An application developer can fill in this slot using the <code><a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#fillin(java.lang.String,%20java.lang.Object,%20boolean)">Section.fillin()</a></code> method, or a <a href="fillin.html">Fillin</a> tag in another template can fill it in. A Slot that is not filled in will show up as blank when the template is printed.
+    </p>
+
+
+    <h3>Using the same name more than once</h3>
+    <p>
+    A given Slot name can be used more than once in a template. All slots with the same name receive the same value when filled in. For example:
+    </p>
+    <pre>
+  Dear <b>[$Slot Person]</b>,
+  
+  We are pleased to inform you that you've won a zillion dollars. What do you think 
+  of that, <b>[$Slot Person]</b>? We bet you're pretty happy. And remember, <b>[$Slot Person]</b>, 
+  you can't buy love, but you can buy a Ferrari.
+  
+  Yours,
+  <b>[$Slot Sender]</b></pre>
+    <p>Here, when "Person" is filled in, it will appear in three different places (the "YourBestFriend" Slot will receive a different value since it has a different name).</p>
+
+
+  <h3>Sample Values</h3>
+    <p>Occasionally it's useful to tag a Slot using the following format, which allows for a &quot;sample&quot; value:</p>
+    <pre>
+  <b>[$Slot MySlot]</b>Here is some sample text, which the Tmplz parser will discard.<b>[$Slot]</b></pre>
+
+ <p class="DocBottomNav">         Next page: <a href="section.html">Section</a>
+ </p>       </td>
+    </tr></table>
+    <script language="javascript" type="text/javascript">
+        tmplzHilite();
+    </script>
+    </div>
+  </body>
+</html>
+
+
+
+
+

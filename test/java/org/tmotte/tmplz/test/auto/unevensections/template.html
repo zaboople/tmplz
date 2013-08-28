@@ -1,0 +1,13 @@
+Template.html is going to show section Foo twice, and section Bar twice. YAH
+[$Include include.html]
+  [$Show Foo]
+    [$Show Foo1]
+      [$Fillin ASlot1]Filled[$Fillin]
+      [$Rename Foo2 Bar2]
+      [$Show Bar2][$Show]
+      [$Remove Bar2]
+      [$Remove ASlot2]
+    [$Show]
+  [$Show]
+[$Include]
+

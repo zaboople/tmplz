@@ -1,0 +1,36 @@
+
+  Welcome to include2.html
+  
+  Test 1:
+    Next is Section Foo...
+    [$Section Foo]
+      Foo
+      Here is slot Bar: [$SlotBar]
+      Here is slot Bar again: [$SlotBar]
+    [$Section] 
+
+  Test 2:
+    Section Foo is the class attribute of this div; value after "Static Text" is Slot Bar:
+    [$AttrSection Foo class]
+    <div class="Static Text [$Slot Bar]">
+
+  Test 3:
+    Section Foo2:
+    [$SectionFoo2] 
+      Foo2 contains Foo3 as plain Section and AttrSection; AttrSection is "class" with value of Slot Bar2:
+      [$Section Foo2.1]This is Foo2.1[$Section]
+      [$AttrSection Foo2.1 class]
+      <div class="[$Slot Bar2]">
+    [$Section]
+  
+  Test 4:
+    [$Section Foo]
+      [$Section Deep2.x.x.x]This is Deep2.x.x.x
+        [$Section Deep3.y.y.y]This is Deep3.y.y.y
+          [$AttrSection Deep4 class]
+          <p class="Deep4 Deepest-> [$Slot ASlot.Deepest]"> Ha! </p>
+        [$Section]    
+      [$Section]
+    [$Section]
+    
+  include2.html says, "goodbye".  

@@ -1,0 +1,9 @@
+This test verifies that 
+1) TagWith is trimmed properly
+2) Consecutive slots on the same line show up properly
+[$Include ./included1.html]
+  [$Show X]
+    [$Fillin A]A value[$Fillin]
+    [$Fillin B]B value[$Fillin]    
+  [$Show]
+[$Include]

@@ -1,0 +1,22 @@
+SELECT 
+  [$Section Y]
+    [$Between],[$Between][$Slot Y]  [$Between]--After Y between[$Between]
+  [$Section]
+SELECT 
+  [$Section Y]
+    [$Between],[$Between]Y2 [$Between]--After Y2 between[$Between]
+  [$Section]
+SELECT 
+  [$Section Z]
+    [$Between],[$Between]Z [$Between] --After Z between![$Between]
+  [$Section]
+SELECT 
+  [$Section Z]
+    [$Between],[$Between]Z2[$Between] --After Z2 between![$Between]
+  [$Section]
+
+And here is an example of a bad between, placed at end of section instead of beginning:
+  [$Section Z]I am section z, and I will only show this between: [$Between],[$Between] 
+  [$Section]
+
+

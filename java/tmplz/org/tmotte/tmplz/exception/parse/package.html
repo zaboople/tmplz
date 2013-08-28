@@ -1,0 +1,16 @@
+<html><body>
+Exceptions in this package are caused by syntax errors in templates. The inheritance hierarchy of exceptions is:
+<ul>
+  <li>AbstractParsingException
+    <ul>
+      <li>TemplateNestedException: Always thrown when a template cannot be parsed. Provides the name of the template. Always contains another Exception, either a TemplateContentException or another TemplateNestedException.</li>
+      <li>TemplateContentException: Abstract class for all other parsing Exceptions. 
+        <ul>
+          <li>IncludeNestedException: Thrown when an Include fails because of errors in an included template. Always contains an Exception that describes the actual syntax error.</li>
+          <li>All the other Exceptions. These do not have any "nesting" and describe a specific syntax error.</li>
+        </ul>
+      </li>
+    </ul>  
+  </li>
+</ul>
+</body></html>
