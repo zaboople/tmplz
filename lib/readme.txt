@@ -1,2 +1,1 @@
 * ServletAPI.jar is here so that references to Servlet API's don't break.
-* FIXME REMOVE? Ant165.jar is actually not necessary, but it brings in ant api's for java classes that reference them. If we don't do this, compile won't break, but doc (javadoc) will blow up because it can't find the ant libraries. Funky huh.

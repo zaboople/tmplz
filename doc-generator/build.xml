@@ -112,6 +112,7 @@
     -->
   <target name="generate" depends="compile">
     <!--Run the Generator program:-->
+    <copy todir="web/content/pages/tmplz/license"  file="lib/license.html"/>
     <mkdir dir="dist/generated/content"/>
     <java classname="org.tmotte.tmplz.apps.SiteGenerator">
       <classpath>
@@ -132,7 +133,6 @@
     <copy todir="dist/generated/images"  preservelastmodified="true">
       <fileset dir="web/images"/>
     </copy>
-    <copy todir="web/content/pages/tmplz/license"  file="lib/license.html"/>
   </target>
 
   <target name="generate-tmplz-docs" depends="clean,generate">
