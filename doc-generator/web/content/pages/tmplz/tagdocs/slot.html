@@ -1,0 +1,45 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  
+  [Fillin Title]Core Tags: Slot[Fillin]
+  [Fillin Body]
+    <p>
+      A <em>Slot</em> specifies a place where information will be filled in later. Example:
+    </p>
+    <pre>
+  I'm not sure how to explain this, so I'll let the computer do it: 
+  <b>[$Slot Explain]</b> ...Hope that helps.</pre>
+   <p>
+    A Slot always has a <i>name</i>; here, the name is "Explain". An application developer can fill in this slot using the <code><a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#fillin(java.lang.String,%20java.lang.Object,%20boolean)">Section.fillin()</a></code> method, or a <a href="fillin.html">Fillin</a> tag in another template can fill it in. A Slot that is not filled in will show up as blank when the template is printed.
+    </p>
+
+
+    <h3>Using the same name more than once</h3>
+    <p>
+    A given Slot name can be used more than once in a template. All slots with the same name receive the same value when filled in. For example:
+    </p>
+    <pre>
+  Dear <b>[$Slot Person]</b>,
+  
+  We are pleased to inform you that you've won a zillion dollars. What do you think 
+  of that, <b>[$Slot Person]</b>? We bet you're pretty happy. And remember, <b>[$Slot Person]</b>, 
+  you can't buy love, but you can buy a Ferrari.
+  
+  Yours,
+  <b>[$Slot Sender]</b></pre>
+    <p>Here, when "Person" is filled in, it will appear in three different places (the "YourBestFriend" Slot will receive a different value since it has a different name).</p>
+
+
+  <h3>Sample Values</h3>
+    <p>Occasionally it's useful to tag a Slot using the following format, which allows for a &quot;sample&quot; value:</p>
+    <pre>
+  <b>[$Slot MySlot]</b>Here is some sample text, which the Tmplz parser will discard.<b>[$Slot]</b></pre>
+
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]section.html[Fillin]
+      [Fillin NextTitle]Section[Fillin]
+    [Include]    
+  [Fillin]
+[Include]
+
+

@@ -1,0 +1,59 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Extra Tags: AttrSection[Fillin]
+  [Fillin Body]
+    
+    <p>
+      This tag is only useful when writing HTML (or XHTML). It provides a workaround to a minor quirk where raw templates can fail HTML validation.
+    </p>
+    
+    <h3>Background</h3>
+    <p>
+      Suppose one wants to create a generic template for checkboxes. One way to write it would be:
+    </p>
+    <pre>
+  &lt;input type="checkbox" checked="<b>[$Slot OnOff]</b>" name="Elephant" value="yes"/&gt; </pre>
+    <p>
+      This is "wrong", however, because standards dictate that the only valid value for <code>checked</code> is <code>&quot;checked&quot;;</code> if it is to be &quot;unchecked&quot;, the <code>checked</code> attribute should be left off (ditto for the <code>option</code> element's <code>selected</code> attribute). The following is better:
+    </p>
+    <pre>
+  &lt;input type="checkbox" <b>[$Section checked]</b>checked="checked"<b>[$Section]</b> name="Elephant" value="yes"/&gt; </pre>
+    <p>
+      We placed a Section around the <code>checked</code> attribute because Sections are invisible unless they are explicitly <i>shown</i>. This way one can use the same template for both checked &amp; unchecked checkboxes. Unfortunately, the "raw" (unparsed) template will be flagged as illegal by an HTML validator because it looks like an invalid attribute. 
+    </p>
+    <h3>Solution</h3>
+    <p>Enter the <b>AttrSection</b> tag:</p>
+    <pre>
+  <b>[$AttrSection checked]</b>
+  &lt;input type="checkbox" checked="checked" name="Elephant" value="yes"/&gt; </pre>
+    <p>
+    This accomplishes the exact same thing as the second example above, using valid HTML: The <code>checked</code> attribute is wrapped in a Section named "checked". Note that the attribute is required to have a value, surrounded by double quotes (here, <code>"checked"</code>).
+    </p>
+    
+    
+    <h3>Variations</h3>
+    <p>
+    The Section name doesn't have to be the same name as the attribute. This creates a Section named "WeHaveElephants" which wraps the <code>checked</code> attribute:
+    </p>
+    <pre>
+  <b>[$AttrSection WeHaveElephants checked]</b>
+  &lt;input type="checkbox" checked="checked" name="Elephant" value="yes"/&gt; </pre>
+    <p>
+    Also, as should be expected, the attribute itself can contain anything a Section can contain:
+    </p>
+    <pre>
+  <b>[$AttrSection class]</b>
+  &lt;div class="<b>[$Section Default]</b>default<b>[$Section]</b> <b>[$Slot Additional]</b>"/&gt; </pre>
+
+    <p class="DocBottomNav">
+       <i>This is the end of the Tmplz Tags documentation.</i>
+    </p>
+
+    [Include includes/ManPageBottom.html]
+      [Fillin Bottom][Fillin]
+    [Include]
+    
+  [Fillin]
+[Include]
+
+

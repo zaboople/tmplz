@@ -1,0 +1,39 @@
+~~TagWith brackets
+[Include includes/ManualPage.html MAIN]
+  [Fillin Title]Introduction [Fillin]
+  [Fillin Body]
+  <p>This tutorial explains how to get started with Tmplz, and provides links to the most important Java classes. Fortunately there are no special XML files to configure; everything is done in Java code. The binary distribution contains two .jar files, <b>tmottecommon.jar</b> and <b>tmplz.jar</b>. These should go in the classpath of an application that will use Tmplz.</p>
+
+  <h3>Code example for the impatient</h3>
+  <p>The following obtains a template, does a few things with it, and prints it.</p>
+  <pre>
+  <b>package org.tmotte.tmplz.test;
+  import org.tmotte.tmplz.Section;
+  import org.tmotte.tmplz.TemplateManager;
+  import org.tmotte.tmplz.load.builtin.FileTextLoaderFactory;
+  public class DocExample {
+    public static void main(String[] args) {
+      TemplateManager templateMgr=new TemplateManager();
+      templateMgr.getTextLoadMgr().register(new FileTextLoaderFactory());
+      Section template=templateMgr.getTemplate("test.html");
+      for (int i=0; i<5; i++){
+        Section s=template.show("item");
+        s.fillin("number", i);
+      }
+      template.appendTo(System.out);
+    }
+  }</b></pre>
+  <p>For the above example to work, the source code for <code>test.html</code> could look something like this:</p>
+<pre>
+  Here are some numbers: 
+    <b>[$Section item]</b>&lt;p&gt;<b>[$Slot number]</b>&lt;/p&gt;<b>[$Section]</b></pre>
+  <p>For a more in-depth explanation, read on.</p>
+
+    [Include includes/ManPageBottom.html]
+      [FillinHref]TemplateManager.html[Fillin]
+      [FillinNextTitle]TemplateManager[Fillin]
+    [Include]    
+
+  
+  [Fillin]
+[Include]

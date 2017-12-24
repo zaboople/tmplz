@@ -1,0 +1,85 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Include Tags: Fillin[Fillin]
+  [Fillin Body]
+  <p>
+    A Fillin "fills in" a Slot in an included template. A Fillin is always nested within an Include, and it always has both a starting and closing tag. Consider the following template, named "formletter.html":
+  </p>
+  <pre>
+    The International Society of Software Problems
+    Somewhere, NH, USA 45678
+    <b>[$Slot Date]</b>:
+    Greetings, <b>[$Slot Person]</b>:
+      We are writing to inform you that your software is giving us a headache. 
+      Please stop doing that, <b>[$Slot Person]</b>.
+    Best Wishes,
+    Us</pre>
+  <p>
+   The next template <i>includes</i> formletter.html and fills in its Slots:
+  </p>
+  <pre>
+    <b>[$Include ./formletter.html]</b>
+      <b>[$Fillin Person]</b>Mr. Difficult<b>[$Fillin]</b>
+      <b>[$Fillin Date]</b>June 12, 2045<b>[$Fillin]</b>
+    <b>[$Include]</b>
+    P.S. This time we mean it.</pre>
+  <p>
+    - and so we get:
+  </p>
+  <pre>
+    The International Society of Software Problems
+    Somewhere, NH, USA 45678
+    June 12, 2045
+      
+    Hello there, Mr Difficult:
+      We are writing to inform you that your software is giving us a headache. 
+      Please stop doing that, Mr. Difficult.
+    Best Wishes,
+    Us
+    P.S. This time we mean it.</pre>
+
+  <a name="order"></a>
+  <h3 id="orderHeading">Fillin order doesn't have to match Slot order</h3>
+  <p>In the prior example, the Slots "Date" &amp; "Greeting" appear respectively, but the Fillins appear in the opposite order. This is perfectly okay.</p>
+  <h3>Allowable Sub-Tags</h3>
+  <p>
+  A Fillin basically acts as a template unto itself, so it can contain all the same kinds of tags. This is a powerful feature since it means a Fillin can be used to insert a complex template inside the included contents of another template. 
+  </p>
+  
+  <a name="destroy"></a>
+  <h3 id="destroyHeading">Fillins "Destroy" Slots</h3>
+  <p>A Fillin causes Slots to become "static", so that a given Slot can only be filled in only once; of course this rule does not affect other templates that Include the same content, since (as noted elsewhere) Include tags only affect the <i>copy</i> of the included template, not the original.</p>
+  
+  <a name="deep"></a>
+  <h3 id="deepHeading">"Deep" Fillins</h3>
+  <p>
+  Recall that Slots can be nested inside of Sections. Sometimes we want to fill in a nested Slot on the assumption that something else will show the Section later on. To do this, the Fillin supplies a list of nested Sections and a final Slot, separated by period (".") characters. For example:
+  </p>
+  <pre>
+    <b>[$Include xyz.html]   
+      [$Fillin X1.X2.X3.YYY]</b>Blah<b>[$Fillin]   
+    [$Include]</b></pre>
+  <p>Here, when xyz.html is included, the parser will look for: Slot YYY <i>inside</i> Section X3 <i>inside</i> Section X2 <i>inside</i> Section X1... and fill it in with "Blah". So xyz.html ought to look something like this:
+  </p>
+  <pre>
+    <b>[$Section X1]</b> 1 ...
+      <b>[$Section X2]</b> 2 ...
+        <b>[$Section X3]</b> 3 ...
+          <b>[$Slot YYY]
+        [$Section]
+      [$Section]
+    [$Section]</b></pre>
+  <p>Note that if we want to fill a Slot that actually <i>has</i> a "." character in its name, the name can be quoted to prevent misinterpretation:</p>
+  <pre>
+    <b>[$Include xyz.html]   
+      [$Fillin "A.Slot.Name"]</b>Etc.<b>[$Fillin]   
+      [$Fillin S1.S2."A.Section.Name"."Another.Slot.Name"]</b>Blah<b>[$Fillin]   
+    [$Include]</b></pre>  
+  
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]show.html[Fillin]
+      [Fillin NextTitle]Show[Fillin]
+    [Include]    
+  [Fillin]
+[Include]
+  

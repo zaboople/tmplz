@@ -1,0 +1,38 @@
+~~TagWith brackets
+
+[Include includes/ManualPage.html]
+  
+  [Fillin Title]Extra Tags: Trim[Fillin]
+  [Fillin Body]
+    <p>The <b>Trim</b> tag is used to remove extra spaces and line breaks. For example, this: </p>
+    <pre>
+  <b>[$Trim]</b>
+  1
+  2
+  3
+  <b>[$Trim]</b></pre>
+    <p>
+    - will be parsed into this:
+    </p>
+    <pre>
+  1 2 3</pre>
+    <p>
+    Note that there is a single space between each of the numbers above, so the whitespace is not completely removed; rather, it is reduced to a single space character. Usually this yields the most desirable results.
+    </p>
+    <h3>Placement</h3>
+    <p>
+    The Trim tag can be used as a top level tag, within any Section, and within any Fillin. It can also be used more than once within any of these contexts.
+    </p>
+    <h3>Auto-Trim</h3>
+    <p>
+    By default Tmplz trims extra space from tags that appear on lines by themselves. This can be turned off by a programmer using the <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/TemplateManager.html#setAutoTrim%28boolean%29">TemplateManager.setAutoTrim()</a> API call.
+    </p>
+      
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]attrsection.html[Fillin]
+      [Fillin NextTitle]AttrSection[Fillin]
+    [Include]            
+  [Fillin]
+[Include]
+
+

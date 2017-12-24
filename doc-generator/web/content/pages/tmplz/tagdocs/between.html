@@ -1,0 +1,40 @@
+~~TagWith brackets
+
+[Include includes/ManualPage.html]
+  
+  [Fillin Title]Extra Tags: Between[Fillin]
+  [Fillin Body]
+    <p>The <b>Between</b> tag can be used within a Section to add content <i>between</i> instances of the Section when it is shown multiple times. Consider the following template, named template.sql: </p>
+    <pre>
+    select <b>[$Section param][$Between]</b>,<b>[$Between]</b>?<b>[$Section]</b>
+      from TableX </pre>
+    <p>
+    - which is included by this template:
+    </p>    
+    <pre>
+    <b>[$Include template.sql]
+      [$Show param/]
+      [$Show param/]
+      [$Show param/]
+    [$Include]</b></pre>
+    <p>
+    - to produce this result:
+    </p>
+    <pre>
+    select ?,?,?
+      from TableX </pre>
+    <p>In this example, the comma appears only between the question marks; if the question mark were shown only once, the comma would not appear at all. Usually it is best to use Between at the <i>beginning</i> of a Section, not the end.
+    </p>
+    <p>Note that Between currently does not allow sub-tags within itself.</p>
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]tagwith.html[Fillin]
+      [Fillin NextTitle]TagWith[Fillin]
+    [Include]    
+    
+       
+  [Fillin]
+
+
+[Include]
+
+

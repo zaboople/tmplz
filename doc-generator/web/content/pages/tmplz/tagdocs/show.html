@@ -1,0 +1,85 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Include Tags: Show[Fillin]
+  [Fillin Body]
+  <p>
+    The Show tag "shows" a Section from an included template. It must always appear inside of an Include tag. Consider the following template, in a file named "list.html", which provides a basic HTML unordered list:
+  </p>
+  <pre>
+  &lt;ul&gt;
+    <b>[$Section Item]</b>&lt;li&gt;<b>[$Slot Value]</b>&lt;/li&gt;<b>[$Section]</b>
+  &lt;/ul&gt;</pre>
+  <p>Using the above template, the next template uses Show and Fillin tags to create a list:</p>
+  <pre>
+  <b>[$Include list.html]
+    [$Show Item]
+      [$Fillin Value]</b>First value.<b>[$Fillin]
+    [$Show]
+    [$Show Item]
+      [$Fillin Value]</b>Second value.<b>[$Fillin]
+    [$Show]
+  [$Include]</b></pre>
+  <p>The result looks like this:</p>
+  <pre>
+  &lt;ul&gt;
+    &lt;li&gt;First Value.&lt;/li&gt;
+    &lt;li&gt;Second Value.&lt;/li&gt;
+  &lt;/ul&gt;</pre>
+  <p>Note how the original Section is shown twice; after the first Show, additional Shows cause the Section to append a copy of itself to itself. </p>
+  <p>Also note the use of nested Fillin tags; the Show tag can contain any tag that an Include tag may contain, i.e. <a href="fillin.html">Fillin</a>, <a href="rename.html">Rename</a>, <a href="remove.html">Remove</a>, and even Show itself. Consider the following example, where Section x2 rests within Section x1 in x.html:
+  </p>    
+  <pre>
+  <b>[$Include x.html]
+    [$Show x1]
+      [$Show x2/]
+    [$Show]
+    [$Show x1]
+      [$Show x2/][$Show x2/]
+    [$Show]
+  [$Include]</b></pre>
+
+
+  <h3>Self-closing Show Tags</h3>
+  <p>Obviously if a Show element contains nested tags, a closing Show tag is needed. When there are no nested tags, however, it is annoying to have to type a closing tag; therefore a Show can close itself using a "/" (just like XML and HTML):</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show Foo/]
+  [$Include]</b></pre>
+  <p>This syntax <i>cannot</i> be used with any other tags; the parser can already recognize whether they are self-closing without the "/" hint.</p>
+
+
+  <a name="order"></a>
+  <h3 id="orderHeading">Order of Show statements</h3>
+  <p>As is the case with <a href="fillin.html#order">Fillin</a>, the order of Show tags does not have to match the order of Section tags in the included document. For example, this: </p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show A/][$Show B/]
+  [$Include]</b></pre>
+  <p>does the same thing as this (B,A instead of A,B):</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show B/][$Show A/]
+  [$Include]</b></pre>
+
+  <a name="destruct"></a>
+  <h3 id="destructHeading">Show does not "destroy" the Section</h3>
+  <p>Unlike the Fillin tag, which <a href="fillin.html#destroy">"destroys"</a> its corresponding Slot, the Show tag leaves the original Section intact so that it can be shown again later. To remove a Section, use the <a href="remove.html">Remove</a> tag.
+
+  <a name="deep"></a>
+  <h3 id="deepHeading">"Deep" Shows</h3> 
+  <p>This works very similar to <a href="fillin.html#deep">deep Fillins</a>. Example:</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show x1.x2/]
+  [$Include]</b></pre>
+  <p>In the above example, Section x2 is shown, but x1 is not, on the assumption that something else will show x1 later on. Contrast this behavior with the earlier example of nested show tags, where both Section x1 &amp; x2 become visible; here, only Section x2 is visible, and only after x1 is shown by something else.</p>
+
+
+  
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]rename.html[Fillin]
+      [Fillin NextTitle]Rename[Fillin]
+    [Include]    
+  [Fillin]
+[Include]
+  

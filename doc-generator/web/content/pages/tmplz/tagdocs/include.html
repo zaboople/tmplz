@@ -1,0 +1,55 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Include Tags: Include[Fillin]
+  [Fillin Body]
+
+  <p>
+    Here is a simple <b>Include</b>:
+  </p>
+  <pre>
+    And now I will....
+    <b>[$Include magic.html]</b>
+    ... surely you are impressed.  </pre>
+  <p>
+    This tells the parser to load magic.html, parse it, and insert its contents into the current template in place of the Include tag. Note that any Slots and Sections in magic.html become part of the current template as well. 
+  </p>
+
+  <h3>Paths</h3>
+  <p>
+  In the example above, the Include specifies a "relative" <i>path</i> that says Tmplz should look for <code>magic.html</code> in the same directory as the current file. Depending on how one sets up Tmplz, a variety of path types can be used; for example, URL path's like <code>http://myserver/magic.html</code> or <code>file://c/templates/magic.html</code>. A computer programmer can set up Tmplz to support such paths and even implement a custom <code><a href="../gettingstarted/TemplateManager.html#TextLoaderFactory">TextLoaderFactory</a></code> to handle paths that require specialized processing. Several built-in TextLoaderFactories are included in the Tmplz distribution.
+  </p>
+
+
+  <h3>Including a Specific Section</h3>
+  <p>Sometimes it is desirable to only include a specific Section from another document:</p>
+  <pre>
+  <b>[$Include ../special.html ThePartAboutPaleontology]</b></pre>
+  <p>The above assumes that a Section named "ThePartAboutPaleontology" exists in the file special.html. The contents of that Section will be inserted into the current template (without the "ThePartAboutPaleontology" Section tag).</p>
+  
+  
+  <h3>Nested tags</h3>
+  <p>
+    Includes can have both a starting and ending tag:
+  </p>
+  <pre>
+    <b>[$Include ../includes/magic.html]</b>
+    ...
+    <b>[$Include]</b>  </pre>
+  <p>This syntax is used with nested tags, specifically: <a href="fillin.html">Fillin</a>, <a href="show.html">Show</a>, <a href="rename.html">Rename</a> and <a href="remove.html">Remove</a>, which are described in the next chapters.</p> 
+
+
+  <h3>Space Characters in Paths and Double Quotes</h3>
+  <p>When including a path that has "whitespace" characters in it, and specifying a Section to include, quotes should be used; for example:</p>
+  <pre>
+  <b>[$Include "../special file about something.html" ThePartAboutPaleontology]</b></pre>
+  <p>Without the quote marks, the path would be assumed to be <code>../special</code>, and the Section name as <code>file about something.html ThePartAboutPaleontology</code>.</p>
+
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]fillin.html[Fillin]
+      [Fillin NextTitle]Fillin[Fillin]
+    [Include]    
+
+
+  [Fillin]
+[Include]
+  

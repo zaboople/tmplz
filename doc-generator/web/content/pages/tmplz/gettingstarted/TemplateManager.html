@@ -1,0 +1,38 @@
+~~TagWith brackets
+[Include includes/ManualPage.html MAIN]
+  [Fillin Title]TemplateManager[Fillin]
+  [Fillin Body]
+  <p>Templates are obtained from a <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/TemplateManager.html">TemplateManager</a>. This class is thread-safe. It's a very "lightweight" class, but one instance can be used to obtain numerous templates. 
+
+  <a name="TextLoaderFactory"></a>
+  <h3 id="TextLoaderFactoryHeading">TextLoaderFactory</h3>
+  <p>Before use, a TemplateManager needs to be supplied with at least one <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/TextLoaderFactory.html">TextLoaderFactory</a>, an interface for classes that can load text templates to be parsed by the TemplateManager. If templates are to be loaded from a web application's own directories, a <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/builtin/ServletContextTextLoaderFactory.html">ServletContextTextLoaderFactory</a> should be supplied:</p> 
+  <pre>
+  public class MyServlet extends HttpServlet {
+
+    <b>TemplateManager templateMgr=new TemplateManager();</b>
+
+    public void init() throws ServletException {
+      <b>templateMgr.getTextLoadMgr().register(
+        new ServletContextTextLoaderFactory(getServletContext());
+      );</b>
+    }
+    ... 
+  }</pre>
+  <p>There are also built-in TextLoaderFactories for loading from the <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/builtin/FileTextLoaderFactory.html">file system</a>, the <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/load/builtin/ClassLoaderTextLoaderFactory.html">Java classpath</a>, and more. It's also fairly easy to write a custom one when necessary.
+  </p>
+
+
+  <h3>Obtaining a template</h3>
+  <p>Once the TemplateManager is ready, obtaining a template is trivial:</p>
+  <pre>
+  <b>Section template=templateMgr.getTemplate("templates/MyTemplate.html");</b></pre>
+  <p>If several concurrent threads ask for the same template from the same TemplateManager, each will receive its own unique copy. </p>
+  
+    [Include includes/ManPageBottom.html]
+      [FillinHref]Section.html[Fillin]
+      [FillinNextTitle]Section[Fillin]
+    [Include]    
+
+  [Fillin]
+[Include]

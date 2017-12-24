@@ -1,0 +1,39 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  
+  [Fillin Title]Introduction[Fillin]
+  
+  [Fillin Body]
+    <a name="general" id="general"></a>
+    <p>Tmplz tags are used to mark up text files for processing by the Tmplz template parser, which turns them into data structures made up of <b>Slots</b> and <b>Sections</b>. This manual explains the syntax for the different tags. Below are some general rules about tag syntax.</p>	
+    <h3>General tag syntax</h3>
+    <p>A Tmplz tag looks like this:</p>
+
+    <pre>
+  <b>[$Slot Foo]</b></pre>
+    
+    <p>The <code><b>[$</b></code> marks the start of the tag, and <code><b>]</b></code> marks the end. The <code><b>Slot</b></code> part is the <i>name</i> of the tag, and the <code><b>Foo</b></code> part is a tag <i>parameter</i>; most tags allow one or more of these. Parameters may need to be <i>quoted</i>, especially when they contain spaces, e.g.:</p>
+
+    <pre>
+  <b>[$Slot "Foo Bar"]</b></pre>
+  <p>Sometimes both an opening tag and closing tag are needed; together, they form an <i>element</i> (stolen from HTML parlance).</p>
+    <pre>
+  <b>[$Section ABC]</b>...Stuff in between...<b>[$Section]</b></pre>
+  <p>A tag that stands alone (such as the <code><b>Slot</b></code> example above) is considered a self-closing element.</p>
+
+    <h3>Customizing the tag syntax</h3>
+
+    <p>If <code><b>$[</b>...<b>]</b></code> are unappealing tag delimiters, they can be changed; this is explained later on in the <a href="tagwith.html">TagWith</a> chapter. For the purposes of this document, however, we will otherwise use <code><b>[$</b>...<b>]</b></code> throughout for consistency. 
+    </p>
+  
+
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]coretags.html[Fillin]
+      [Fillin NextTitle]Core Tags[Fillin]
+    [Include]    
+        
+  [Fillin]
+
+[Include]
+
+

@@ -1,0 +1,50 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Include Tags: Remove[Fillin]
+  [Fillin Body]
+  <p>
+    The Remove tag can remove Slots and Sections from an included template. Although not absolutely essential, it can help eliminate clutter in templates and slightly improve their performance. Example:
+  </p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Remove Section X]
+    [$Remove Slot Y]
+  [$Include]</b></pre>
+  <p>The template above assumes that foo.html has a top-level Section named X, and a top-level Slot named Y, and removes both of them. The original foo.html is unaffected; the changes are only made to the copy included into the current template. </p>
+
+  <h3>Removing tags after showing them</h3>
+  <p>As noted earlier, <a href="show.html#destruct">Show does not "destroy" the Section</a>. The Remove tag can be used after a Show to prevent the original Section from appearing in the final template. In the following example, Section X is shown twice, then removed:
+  </p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Show X][$Fillin Y]</b>Hello<b>[$Fillin][$Show]
+    [$Show X][$Fillin Y]</b>World<b>[$Fillin][$Show]
+    [$Remove Section X]
+  [$Include]</b></pre>
+  <p>If one attempted to add another <code><b>[$Show X]</b></code> <i>after</i> the <code><b>Remove</b></code> tag above, Tmplz would generate an error.</p>
+
+  <h3>"Slot" and "Section" Are Optional</h3>
+  <p>Like <a href="rename.html#optional">Rename</a>, Remove does not have to specify whether it is removing a Slot or Section. If a Section and a Slot have the same name, a single Remove tag can remove both. Example:</p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Remove X]
+  [$Include]</b></pre>
+
+
+  <a name="order"></a>
+  <h3 id="orderHeading">Order of Remove tags</h3>
+  <p>As with <a href="fillin.html#order">Fillin</a>, <a href="show.html#order">Show</a> &amp; <a href="rename.html#order">Rename</a>, Remove tags do not have to appear in the same order as the Slots and Sections they rename. Show and/or Fillin tags that follow the Remove cannot reference the removed element, however.</p>
+
+  <h3>"Deep" Removes</h3>
+  <p>This works much like deep <a href="fillin.html#deep">Fillin</a>, <a href="show.html#deep">Show</a> &amp; <a href="rename.html#deep">Rename</a>. To remove a Section or Slot that is buried several levels deep within a template, just separate the parent tags with "." characters:</p>
+  <pre>
+  <b>[$Remove Slot S1.S2.S3.S4]</b></pre>
+  <p>In the above example, S1, S2 &amp; S3 are Sections, and S4 is a Slot. Only S4 will be removed.</p>
+
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]extratags.html[Fillin]
+      [Fillin NextTitle]Remove[Fillin]
+    [Include]    
+  [Fillin]
+[Include]
+  

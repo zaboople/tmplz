@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+
+<project name="Tmplz.org" basedir="." default="help">
+
+  <!--******-->
+  <!--HELP  -->
+  <!--******-->
+
+  <target name="help">
+    <echo>
+
+
+    Prep targets:
+      clean:
+        Creates a clean environment ready for a fresh build.
+
+    Intermediate Targets:
+      compile:
+        Compiles the one class we use.
+      web:
+        Creates a complete site that can be run as Java application from the build directory. Run
+        the dist task to create a deployable site.
+        -Runs compile
+        -Gets the binary dist, source dist, and javadoc from parent directory's build.xml
+         and copies into ./web/downloads &amp; ./web/javadoc.
+      generate:
+        Generates ./dist/generated/content from ./web/content using the Tmplz content
+        generator application, to create a "static" version of the Tmplz content in the
+        site. This is an incomplete site, however.
+      generate-tmplz-docs
+        Generates the tmplz documentation to put in tmplz's own distribution.
+
+
+    Distribution Targets:
+      dist:
+        Builds deployable web site in *two* formats:
+        - "Static" site, in dist/generated &amp; dist.generated.zip
+        - Java web application   as static HTML etc., and as a java web application.
+        What it does:
+        - Runs "generate" task and builds out complete site in dist/generated
+        - Runs "web" task
+        - Creates ./dist/generated.zip from ./dist/generated
+        - Creates dist/${webapp.name}.war from ./web (note:  ./web/WEB-INF/web.xml's
+          init-param "Context" assumes base path of "/${webapp.name}/")
+
+
+    Tomcat Logging Targets (optional):
+      config.tomcat.log.severe,config.tomcat.log.info, config.tomcat.log.fine, config.tomcat.log.finest:
+        Tmplz uses java.util.logging to do its logs. I use these targets to make Tomcat
+        generate log information because that's what I develop with. These targets will generate
+        WEB-INF/logging.properties from lib/tomcat.log.properties. IF you DON'T do this, you will
+        NOT get a log on Apache Tomcat when running the application. YMMV on other application servers.
+
+    Tomcat Application Targets:
+      reload.tomcat, start.tomcat, stop.tomcat:
+        For starting and stopping the application in Tomcat. Requires environment variables
+        (i.e. shell environment variables, i.e. DOS "set" or Unix "export")
+        for Tomcat's "manager": TOMCAT_MGR_URL, TOMCAT_MGR_USER, TOMCAT_MGR_PASS
+    </echo>
+  </target>
+
+  <!--**********-->
+  <!--PROPERTIES-->
+  <!--**********-->
+
+  <!--Properties: environment-->
+  <property environment="env"/>
+  <property file="build.properties"/>
+  <!--Properties: directories:-->
+  <property name="lib.dir" value="lib"/>
+  <!--Blank out classpath so that user classpath doesn't interfere: -->
+  <path id="classpath"></path>
+
+  <!--**********-->
+  <!--  CLEAN   -->
+  <!--**********-->
+
+  <target name="clean" description="Clean output directories">
+    <delete dir="dist"/>
+    <delete file="web/content/pages/tmplz/license/license.html"/>
+  </target>
+
+
+  <!--*******-->
+  <!--COMPILE-->
+  <!--*******-->
+
+  <target name="compile" description="Compile our tiny bit of java">
+    <mkdir dir="web/WEB-INF/classes"/>
+    <javac
+      destdir="web/WEB-INF/classes"
+      debug="true"
+      deprecation="false"
+      failonerror="true"
+      >
+      <src path="java"/>
+      <classpath>
+        <fileset dir="lib" includes="*.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+
+  <!--*************-->
+  <!--GENERATE HTML-->
+  <!--*************-->
+  <!--
+    This does not generate a complete web site; it does only part of that.
+    It is invoked by the "dist" target so that
+    we can construct a generated web site for distribution
+    along with the war file.
+    -->
+  <target name="generate" depends="compile">
+    <!--Run the Generator program:-->
+    <mkdir dir="dist/generated/content"/>
+    <java classname="org.tmotte.tmplz.apps.SiteGenerator">
+      <classpath>
+        <pathelement location="lib/tmplz-${VERSION.TMPLZ}.jar"/>
+        <pathelement location="lib/tmottecommon-${VERSION.TMPLZ}.jar"/>
+      </classpath>
+      <arg value="-from"/>  <arg value="web/content"/>
+
+      <arg value="-to"/>    <arg value="dist/generated/content"/>
+
+      <arg value="-relativeContext"/>
+
+      <arg value="-fillin.props"/> <arg value="./build.properties"/>
+
+      <arg value="-fillin"/>  <arg value="SiteContext"/>  <arg value="http://www.tmplz.org/content/"/>
+    </java>
+    <mkdir dir="dist/generated/images"/>
+    <copy todir="dist/generated/images"  preservelastmodified="true">
+      <fileset dir="web/images"/>
+    </copy>
+    <copy todir="web/content/pages/tmplz/license"  file="lib/license.html"/>
+  </target>
+
+  <target name="generate-tmplz-docs" depends="clean,generate">
+    <delete dir="dist/generated/javadoc/pdfrpt"/>
+    <delete dir="dist/generated/content/pages/pdfrpt"/>
+    <delete dir="dist/generated/content/pages/klonk"/>
+
+    <delete file="dist/generated/content/pages/index.html"/>
+    <delete file="dist/generated/content/pages/tmplz/index.html"/>
+    <copy   file="dist/generated/content/pages/tmplz/indexDist.html"
+          tofile="dist/generated/content/pages/tmplz/index.html"/>
+    <copy   file="web/index-tmplz-redirect.html"
+          tofile="dist/generated/index.html"/>
+  </target>
+
+  <!--************-->
+  <!--DISTRIBUTION-->
+  <!--************-->
+
+  <target name="dist" depends="compile,generate">
+
+
+    <!--2. Complete generated static HTML site:-->
+    <!--Note that we handle index.html outside of generate because
+        it's different for tmplz's generated docs.-->
+    <copy file="web/index.html" tofile="dist/generated/index.html"/>
+    <copy todir="dist/generated/downloads"  preservelastmodified="true">
+      <fileset dir="web/downloads" includes="*.zip"/>
+    </copy>
+    <zip destfile="dist/generated.zip">
+      <zipfileset dir="dist/generated"/>
+    </zip>
+
+  </target>
+
+
+
+</project>

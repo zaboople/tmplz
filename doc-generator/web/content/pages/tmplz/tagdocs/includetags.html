@@ -1,0 +1,16 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Include Tags[Fillin]
+  [Fillin Body]
+
+  <p>
+  <a href="include.html">Include</a> elements provide a powerful way to build templates from other templates. An Include's functionality can be enhanced by four additional elements - <a href="fillin.html">Fillin</a>, <a href="show.html">Show</a>, <a href="rename.html">Rename</a> &amp; <a href="remove.html">Remove</a> - which are always nested inside of an Include. Note that these nested elements do not alter the <i>original</i> template that is being included; they alter the <i>copy</i> that is made for inclusion, so that a single template can be included many times (often into many others) and used differently each time.</p>
+
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]include.html[Fillin]
+      [Fillin NextTitle]Include[Fillin]
+    [Include]    
+  
+  [Fillin]
+[Include]
+  

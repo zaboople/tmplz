@@ -1,0 +1,60 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Core Tags: Section[Fillin]  
+  [Fillin Body]
+    <p>
+      <b>Section</b> tags demarcate a block of content that is invisible by default;
+      it must be explicitly &quot;shown&quot; (via the <a href="show.html">Show</a> tag or 
+      <code><a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#show(java.lang.String)">Section.show()</a></code> Java method), and appends copies to itself when shown multiple times. A Section always has a name, and always requires both a starting tag and an ending tag. A simple example:
+    </p>
+    <pre>
+    <b>[$Section MySection]</b> Hello World. <b>[$Section]</b></pre>
+
+  <a name="subtags"></a>
+  <h3 id="subtagsHeading">Allowable sub-tags</h3>
+  <p>
+    A template is essentially an "unnamed" Section, so a Section can contain any template tag. Additionally, a Section can contain <a href="between.html">Between</a> tags (described in a later chapter), which are <i>not</i> used outside of Sections. 
+  </p>
+  <p>Shown below are helpful examples of nested Slots and Sections:</p>
+    
+    <h4>Nested Slots</h4>
+    <pre>
+  &lt;table&gt;
+    <b>[$Section Row]</b>
+      &lt;tr&gt;
+        &lt;td&gt;<b>[$Slot FirstName]</b>&lt;/td&gt;&lt;td&gt;<b>[$Slot LastName]</b>&lt;/td&gt;
+      &lt;/tr&gt;
+    <b>[$Section]</b>
+  &lt;/table&gt;  </pre>
+    
+    <p>Here a Section named "Row" is defined, containing two Slots; every time the Section is shown, those Slots can be filled in with different values. Thus we can use this template to create an HTML table with multiple rows of varying data. 
+    </p>    
+
+
+    <h4>Nested Sections</h4>
+    <pre>
+  &lt;table&gt;
+    <b>[$Section Row]</b>
+      &lt;tr&gt;
+        <b>[$Section Column]</b>
+          &lt;td&gt;<b>[$Slot Value]</b>&lt;/td&gt;     
+        <b>[$Section]</b>
+      &lt;/tr&gt;
+    <b>[$Section]</b>
+  &lt;/table&gt;  </pre>        
+    <p>
+      Here the "Row" Section contains the "Column" Section, which in turn contains a Slot named "Value". This example template could be used to create an HTML table with any number of rows, each containing any number of columns, and each column containing a different value.
+    </p>
+
+    <h3>Using the Same Section Name More Than Once</h3>
+    <p>If multiple Sections have the same name, they will be treated as a single Section and all will be shown when the Template is instructed to show them. It is okay, however, if Sections with the same name have differently named sub-Sections and Slots.</p>
+
+    
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]includetags.html[Fillin]
+      [Fillin NextTitle]Include Tags[Fillin]
+    [Include]    
+  [Fillin]
+[Include]
+
+

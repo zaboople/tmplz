@@ -1,0 +1,49 @@
+~~TagWith brackets
+[Include includes/ManualPage.html MAIN]
+  [Fillin Title]Section[Fillin]
+  [Fillin Body]
+
+  <p>
+  The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html">Section</a> class is analagous to the <code><b><a href="../tagdocs/section.html">Section</a></b></code> template tag; every Section in a template is represented in the Tmplz API as an instance of the Section class. The entire template itself is an instance of Section as well.
+  </p>
+  
+  
+  <h3>Section.show()</h3>
+  <p>
+  The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#show(java.lang.String)">Section.show()</a> method obtains a Section nested within the current Section, makes it visible, and returns it. (Note that the template Section itself is automatically "shown" when it is obtained from the TemplateManager). 
+  </p>
+  <pre>
+  //Show the "Row" Section three times, and within each of those, 
+  //show the "Col" section twice:
+  <b>for (int i=0; i<=3; i++) {
+    Section row=template.show("Row");
+    Section col1=row.show("Col"),
+            col2=row.show("Col");
+  }</b></pre>
+  <p>Every time a Section is repeated, it makes a copy of itself and appends the copy to itself. Each copy has its own internal Sections &amp; Slots.</p>
+
+  
+  <h3>Section.fillin()</h3>
+  <p>
+  The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#fillin(java.lang.String,%20java.lang.Object)">Section.fillin()</a> method fills in named Slots in the template. For example:
+  </p>
+  <pre>
+  //Fillin the slot "FullName" with the value "Mr. Jones":
+  <b>mySection.fillin("FullName", "Mr. Jones");</b></pre>
+  
+  <a name="printing"></a>
+  <h3 id="printingHeading">Printing the template</h3>
+  <p>
+  The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#appendTo(java.lang.Appendable)">Section.appendTo()</a> method prints the Section to any instance of <code>java.lang.Appendable</code> (including <code>java.io.Writer</code>, <code>System.out</code>, <code>java.lang.StringBuilder</code>, etc.). So one can print an entire template, or just a specific Section obtained from a template. <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/Section.html#toString()">Section.toString()</a> will also "print" the Section (to a single String result), but appendTo() is more efficient when writing the template to a stream.
+  </p>
+  <pre>
+  //Print the template to System.out:
+  <b>myTemplate.appendTo(System.out);</b></pre>
+    [Include includes/ManPageBottom.html]
+      [FillinHref]Additional.html[Fillin]
+      [FillinNextTitle]Additional Classes &amp; Things[Fillin]
+    [Include]    
+
+  
+  [Fillin]
+[Include]

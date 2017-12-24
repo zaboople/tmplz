@@ -1,0 +1,48 @@
+Template=[Section|Slot|Include|Trim|TagWith|AttrSection|PlainText]*
+
+PlainText=Any plain text
+
+Section=
+  StartDelim , 'Section ', Name , EndDelim ,
+    Template
+  StartDelim , 'Section' , EndDelim
+  
+Slot=
+  StartDelim 'Slot ', Name EndDelim   
+  [PlainText 
+   StartDelim Slot EndDelim] 
+  
+Include=
+  StartDelim, 'Include ', Name, SectionName EndDelim 
+    [Fillin|Show|Remove|Rename]*
+  <StartDelim>Include<EndDelim>
+
+  Reference=Name of a template to include.
+  SectionName=Name of a Section.
+
+Fillin=
+  <StartDelim>Fillin [<SectionList>]) [SectionName]<EndDelim> 
+    [Fillin|Show|Remove|Rename]*
+  <StartDelim>Section<EndDelim>
+
+
+<SectionList>=
+  <<SectionName>|<"SectionName">.>*
+  
+  
+Section  Section, Fillin
+Slot Section, Fillin
+Include Section, Fillin
+
+TagWith Section, Fillin  
+Trim Section, Fillin
+AttrSection Section, Fillin
+
+Show Include, Show
+Fillin Include, Show
+Remove Include, Show
+Rename Include, Show
+
+<StartDelim>=[$
+<EndDelim>=]
+*Note: <StartDelim> & <EndDelim> are configurable.

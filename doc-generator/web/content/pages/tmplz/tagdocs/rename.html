@@ -1,0 +1,58 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Include Tags: Rename[Fillin]
+  [Fillin Body]
+  <p>
+    Occasionally it is useful to change the names of Slot &amp; Section tags in an included template. The <b>Rename</b> tag does this, and so it only appears inside of Include elements. Example:
+  </p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Rename Section X XX]
+    [$Rename Slot Y YY]
+  [$Include]</b></pre>
+  <p>The template above assumes that foo.html has a top-level Section named X and a top-level Slot named Y, and renames them to XX &amp; YY respectively. The original foo.html is unaffected; the changes are only made to the copy included into the current template. Templates that include the current template have to use the new names to refer to the renamed tags.</p>
+
+  <a name="optional"></a>
+  <h3 id="optionalHeading">"Slot" and "Section" Are Optional</h3>
+  <p>A Rename tag does not have to specify whether it is renaming a Slot or Section. As a matter of fact, a single Rename tag can rename both. For example:</p>
+  <pre>
+  <b>[$Include foo.html]
+    [$Rename X Y]
+  [$Include]</b></pre>
+  <p>Given the above template, if foo.html looks like this:</p>
+  <pre>
+  <b>[$Section X]</b>Here is some text.<b>[$Section]</b>
+  <b>[$Slot X]</b></pre>
+  <p>- then the effective result is:</p>
+  <pre>
+  <b>[$Section Y]</b>Here is some text.<b>[$Section]</b>
+  <b>[$Slot Y]</b></pre>
+
+  <a name="order"></a>
+  <h3 id="orderHeading">Order of Rename tags</h3>
+  <p>As with <a href="fillin.html#order">Fillin</a> and <a href="show.html#order">Show</a>, Rename tags do not have to appear in the same order as the Slots and Sections they rename. The Rename does affect the Show &amp; Fillin tags after it, however:</p>
+  <pre>
+  <b>[$Include x.html]
+    [$Show A/]
+    [$Fillin B]</b>Hello<b>[$Fillin]
+    [$Rename Section A AA]
+    [$Rename Slot    B BB]
+    [$Show AA/]
+    [$Fillin BB]</b>Hello again<b>[$Fillin]
+  [$Include]</b></pre>
+
+  <a name="deep"></a>
+  <h3 id="deepHeading">"Deep" Renames</h3>
+  <p>This works much like deep <a href="fillin.html#deep">Fillins</a> and <a href="show.html#deep">Shows</a>. To rename a Section or Slot that is buried several levels deep within a template, just separate the parent tags with "." characters:</p>
+  <pre>
+  <b>[$Rename Slot S1.S2.S3.S4 Excellent]</b></pre>
+  <p>In the above example, S1, S2 &amp; S3 are Sections, and S4 is a Slot; S4 will be renamed to "Excellent".</p>
+
+  
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]extratags.html[Fillin]
+      [Fillin NextTitle]Rename[Fillin]
+    [Include]    
+  [Fillin]
+[Include]
+  

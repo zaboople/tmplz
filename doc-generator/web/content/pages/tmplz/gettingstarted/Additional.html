@@ -1,0 +1,28 @@
+~~TagWith brackets
+[Include includes/ManualPage.html MAIN]
+  [Fillin Title]Additional classes &amp; things[Fillin]
+  [Fillin Body]
+
+  <h3>Appender</h3>
+  <p>
+  <code>Section.fillin()</code> accepts any object as its target, but it's often helpful for such an object to implement the <a href="../../../../javadoc/tmplz/org/tmotte/common/text/Appender.html">Appender</a> interface. This allows one to avoid the excessive String concatenation that can occur when implementing Object.toString().
+  </p>
+  <p>Note that the Section class itself implements Appender, so it implements appendTo() as noted in <a href="Section.html#printing">Printing the template.</a></p>
+  
+  <h3>TemplateInterceptor</h3>
+  <p>
+  The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/util/TemplateInterceptor.html">TemplateInterceptor</a> interface allows one to intercept all templates processed by a TemplateManager and perform actions on them. 
+  </p>
+  
+  <h3>SiteGenerator</h3>
+  <p>The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/apps/SiteGenerator.html">SiteGenerator</a> generates a "static" web site from a series of templates. It is designed for easy use from the command line.</p>
+
+  <h3>TemplateLister</h3>
+  <p>The <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/apps/TemplateLister.html">TemplateLister</a> class can generate a hierarchical listing of a template, as well as code skeleton for pasting into Java code. It is designed for easy use from the command line or within a web application.</p>
+
+  <h3>Logging</h3>
+  <p>Tmplz generates logs via the java.util.logging package. Most log data is generated during the template loading process, since it's kind of tricky. All information is written to a Logger instance obtained via <code>Logger.getLogger("org.tmotte.tmplz")</code>. Some folks don't like java.util.logging, but we use it because it's supported by all certified Java Enterprise Edition servers. 
+  </p>
+
+  [Fillin]
+[Include]  

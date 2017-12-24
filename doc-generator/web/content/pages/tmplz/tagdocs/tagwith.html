@@ -1,0 +1,103 @@
+~~TagWith brackets
+[Include includes/ManualPage.html]
+  [Fillin Title]Extra Tags: TagWith[Fillin]
+  [Fillin Body]
+    <p>
+      The TagWith tag allows a template author to change the delimiter characters for Tmplz tags. When the parser encounters a TagWith tag, it switches to the specified syntax for all tags thereafter. A file can have multiple TagWith's.
+    </p>
+
+
+    <h3>Example 1</h3>
+    <pre>
+  <b>[$TagWith {{ }}]</b>
+  <b>{{Slot X1}}</b>
+  
+  <b>{{TagWith "{$" "}"}}</b>
+  <b>{$Slot X2}</b></pre>
+    <p>First we changed delimiters from the default <code><b>[$</b>...<b>]</b></code> to <code><b>{{</b>...<b>}}</b></code>. Then we changed them again, this time to <code><b>{$</b>...<b>}</b></code>, and using quote (<code><b>"</b></code>) characters around the new delimiters to keep the parser from getting confused. Our end result is two Slots: X1 and X2.</p>
+
+    <h3>Example 2</h3>
+    <pre>
+  <b>[$TagWith javascript]</b></pre>
+    <p>
+      This sets the delimiters to <code><b>/*</b>...<b>*/</b></code> (Javascript comment syntax), and it's one of the "named" TagWith options. Here are all of them (they are case-insensitive, presented here in lower case):
+    </p>
+    <table class="TagWithBuiltIns" cellspacing="0" cellpadding="0">
+      <tr>
+        <th>Name</th><th>Result</th>
+      </tr>
+      <tr>
+        <td class="code">default</td><td class="code">[$ ]</td>
+      </tr>
+      <tr>
+        <td class="code">sql</td><td class="code">/* */</td>
+      </tr>
+      <tr>
+        <td class="code">javascript</td><td class="code">/* */</td>
+      </tr>
+      <tr>
+        <td class="code">css</td><td class="code">/* */</td>
+      </tr>
+      <tr>
+        <td class="code">curlies</td><td class="code">{ }</td>
+      </tr>
+      <tr>
+        <td class="code">brackets</td><td class="code">[ ]</td>
+      </tr>
+      <tr>
+        <td class="code">xml</td><td class="code">&lt;-- --&gt;</td>
+      </tr>
+      <tr>
+        <td class="code">html</td><td class="code">&lt;-- --&gt;</td>
+      </tr>
+      <tr>
+        <td class="code">revert</td><td>Returns to whatever was in effect <br/> before the most recent TagWith.</td>
+      </tr>
+    </table>
+
+      
+    
+    <h3>Example 3</h3>
+    
+    <!--Note "clever" use of HTML character code to fake out the parser on TagWith. heh. stupid. -tm -->    
+    <pre>
+  <b>~~&#84;agWith javascript
+  /*Slot Bar*/
+
+  ~~&#84;agWith {{,}}
+  {{Slot Bar}}</b></pre>
+  
+  
+    <p>Here we are using a somewhat atypical syntax, but it works no matter what the current tag delimiters are: Start with <code><b>~~&#84;agWith</b></code>, followed by a single space, followed by our delimiter definition, and end with a blank space or line break. The delimiter definition can use one of two patterns:</p>
+    <ul>
+      <li>A "named" delimiter set, as is the case with <code><b>javascript</b></code> above;
+      <li>A pair of delimiters separated by a comma, without any quotes or spaces, as with <code><b>{{,}}</b></code> above. 
+    </ul>
+    <p>This can be helpful in a situation where one has no guarantee about the default delimiters, such as when writing reuseable template libraries (also refer to "Setting Defaults" below).</p>
+    
+
+    <h3>Additional Notes</h3>
+    
+    <h4>Delimiters Don't Have to be Weird</h4>
+    <p>If "<code><b>{</b></code>" and "<code><b>}</b></code>" are the current delimiters, and one puts <code>{BlahBlahBlah}</code> in a template, "BlahBlahBlah" is not a Tmplz tag, so this will be treated as normal text. Thus there is no need to use excessively weird delimiters in an effort to avoid accidentally confusing the template parser. </p>    
+
+   
+    <h4>Setting defaults</h4>
+    <p>
+      Instead of typing TagWith into every template, the default tag delimiters can be set by a Java programmer using <a href="../../../../javadoc/tmplz/org/tmotte/tmplz/TemplateManager.html#setTagDelimiters%28java.lang.String,%20java.lang.String%29">TemplateManager.setTagDelimiters()</a>.
+    </p>
+    <h4>XML</h4>
+    <p>
+      Tmplz does not have any way to specify XML-compliant tagging, e.g.:
+    </p>
+    <pre>
+  &lt;Section Foo&gt; blar blar blar &lt;/Section&gt;
+  &lt;Slot Bar/&gt;</pre>
+
+    [Include includes/ManPageBottomLinks.html]
+      [Fillin Href]trim.html[Fillin]
+      [Fillin NextTitle]Trim[Fillin]
+    [Include]            
+  [Fillin]
+[Include]
+
