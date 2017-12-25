@@ -8,4 +8,9 @@ Tmplz is written in Java and has a very simple API. The markup language is fully
 
 ## Building
 
-To build Tmplz you need a reasonable Java installation (1.6 or later) and Apache Ant. Run `ant dist` to obtain a full distribution; documentation will be in dist/bin/docs.
+To build Tmplz you need a reasonable Java installation (1.7 or later) and Apache Ant. Run `ant dist` to obtain a full distribution; documentation will be in dist/bin/docs.
+
+## Download & Documentation
+
+[Everything is on the main site](https://zaboople.github.io/pages/tmplz/index.html)
+
