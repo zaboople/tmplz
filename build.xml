@@ -8,7 +8,7 @@
 
   <!--Property files:-->
   <property file="build.properties"/>
-  
+
   <!--Properties: arbitrary environment prefix:-->
   <property environment="env"/>
 
@@ -31,7 +31,7 @@
     <echo>
     Basic targets:
       clean        => Deletes build, dist and javadoc directories.
-                      Also cleans the "test" and "site" subprojects.      
+                      Also cleans the "test" and "site" subprojects.
       compile      => Compile all Java files into build directory; builds
                       dist/bin/tmottecommon.jar.
       jar          => Invokes compile, then creates dist/bin/tmplz.${VERSION.TMPLZ}.jar.
@@ -39,8 +39,8 @@
       dist         => Generates source &amp; binary .zip distributions in dist directory.
                       The source distribution is essentially a backup of the complete
                       project &amp; subprojects.
-                      
-                      Also generates the files needed by the tmplz site, under dist/site. 
+
+                      Also generates the files needed by the tmplz site, under dist/site.
                       These go in the lib/external-tmplz directory of the tmplz.org source tree.
 
                       Note that this target requires the current generated version of
@@ -60,34 +60,34 @@
     <delete dir="build"/>
     <delete dir="javadoc"/>
     <delete dir="${dist.dir}"/>
-    <delete dir="${web.dir}/WEB-INF/classes/**"/>    
+    <delete dir="${web.dir}/WEB-INF/classes/**"/>
   </target>
-  
+
   <!--***********************-->
   <!--TARGETS: COMPILE & JAR -->
   <!--***********************-->
-  
+
   <target name="compile.common" description="Compile /org/tmotte/common, which is used by tmplz; generates jar file in dist.">
     <mkdir dir="${build.common.dir}"/>
     <mkdir dir="${dist.dir}/bin"/>
-    <javac 
-      destdir="${build.common.dir}" 
-      debug="true" 
-      deprecation="false" 
+    <javac
+      destdir="${build.common.dir}"
+      debug="true"
+      deprecation="false"
       failonerror="true"
       >
       <src path="${src.dir}/common"/>
     </javac>
     <jar destfile="${dist.dir}/bin/tmottecommon-${VERSION.TMPLZ}.jar">
       <fileset dir="${build.common.dir}"/>
-    </jar>        
-  </target>  
+    </jar>
+  </target>
   <target name="compile" depends="compile.common" description="Compile /org/tmotte/tmplz">
     <mkdir dir="${build.tmplz.dir}"/>
-    <javac 
-      destdir="${build.tmplz.dir}" 
-      debug="true" 
-      deprecation="false" 
+    <javac
+      destdir="${build.tmplz.dir}"
+      debug="true"
+      deprecation="false"
       failonerror="true"
       >
       <src path="${src.dir}/tmplz"/>
@@ -102,9 +102,9 @@
     <jar destfile="${dist.dir}/bin/tmplz-${VERSION.TMPLZ}.jar">
       <fileset dir="${build.tmplz.dir}">
       </fileset>
-    </jar>        
-  </target>  
-  
+    </jar>
+  </target>
+
 
   <!--*************************************-->
   <!--TARGETS: DISTRIBUTION/DOCUMENTATION: -->
@@ -112,15 +112,15 @@
 
   <target name="javadoc" description="JavaDoc" depends="compile.common,compile">
     <mkdir dir="${javadoc.dir}"/>
-    <javadoc sourcepath="${src.dir}" 
-             destdir="${javadoc.dir}" 
+    <javadoc sourcepath="${src.dir}"
+             destdir="${javadoc.dir}"
              packagenames="org.**,com.**"
              Public="true"
-             >
+             additionalparam="-Xdoclint:html">
       <classpath>
          <pathelement path="${build.common.dir}"/>
          <pathelement path="${build.tmplz.dir}"/>
-         <fileset dir="${lib.dir}" includes="*.jar"/>        
+         <fileset dir="${lib.dir}" includes="*.jar"/>
       </classpath>
       <fileset dir="${src.dir}">
         <include name="**/*.java"/>
@@ -128,10 +128,10 @@
     </javadoc>
   </target>
 
-  
+
   <target name="dist" depends="dist.src,javadoc,dist.bin,dist.site">
     <!--
-      Note: dist.src has to come first because it does a clean, which 
+      Note: dist.src has to come first because it does a clean, which
       will wipe out the dist directory itself.
       -->
     <echo>
@@ -140,7 +140,7 @@
       Binary distribution is ${dist.dir}/${dist.prefix}.zip.
     </echo>
   </target>
-  
+
   <target name="dist.site">
     <mkdir dir="${dist.dir}/site/"/>
     <copy todir="${dist.dir}/site/javadoc">
@@ -160,11 +160,13 @@
     <copy todir="${dist.dir}/site" file="build.properties"/>
   </target>
 
-  <target name="dist.src" depends="clean">  
-    <mkdir dir="${dist.dir}"/>
-    <zip destfile="dist/${dist.prefix}.src.zip">
-      <zipfileset dir="." prefix="${dist.prefix}.src" excludes=".git/**/*,.git"/>
-    </zip>
+  <target name="dist.src" depends="clean">
+    <!--
+      <mkdir dir="${dist.dir}"/>
+      <zip destfile="dist/${dist.prefix}.src.zip">
+        <zipfileset dir="." prefix="${dist.prefix}.src" excludes=".git/**/*,.git"/>
+      </zip>
+    -->
   </target>
 
   <target name="dist.bin" depends="jar">
@@ -173,7 +175,7 @@
     <copy todir="dist/bin/docs/">
       <fileset dir="lib/external-tmplz.org/generated"/>
     </copy>
-    
+
     <zip destfile="dist/${dist.prefix}.zip">
       <zipfileset dir="dist/bin" prefix="${dist.prefix}"/>
     </zip>

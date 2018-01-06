@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import org.tmotte.common.text.DelimitedString;
 
-/** 
+/**
  * This acts as a list of Node objects. It isn't a Node in and of itself.
  */
 public class NodeList {
   private List list=new LinkedList();
-  
+
   public NodeList duplicate(){
     NodeList other=new NodeList();
     for (int i=0; i<size(); i++)
       other.add(get(i).cloneSelf());
     return other;
   }
-  
+
   public void add(Node node){
     list.add(node);
   }
@@ -38,16 +38,16 @@ public class NodeList {
   }
 
   /**
-   * This moves the node at position i forwards one, 
+   * This moves the node at position i forwards one,
    * and replaces it with <pre>node</pre>
    */
   public void add(int i, Node node){
     list.add(i, node);
   }
   /**
-   * This moves the node at position i forwards one, 
+   * This moves the node at position i forwards one,
    * and replaces it with <pre>nodes</pre>
-   * @return The new index of the last node added. Not the index of the 
+   * @return The new index of the last node added. Not the index of the
    *         node after it, or before it, but it. So if a list of length=3
    *         is added, the return value should be i+3-1.
    */
@@ -58,10 +58,12 @@ public class NodeList {
     return size+i-1;
   }
   /**
+   *  <p>
    *  This calls remove(i), then add(i, nodes); The result returned
-   *  is the result of the latter function.<br/>
+   *  is the result of the latter function.
+   *  <p>
    *  So x.replace(3, y) removes the item at position 3 of x, and
-   *  inserts each node of y into x starting at position 3. If 
+   *  inserts each node of y into x starting at position 3. If
    *  x had a size() of 2, the result returned will be 4, which is
    *  the position of the last node inserted into y.
    */
@@ -81,19 +83,19 @@ public class NodeList {
       ds.add(get(i));
     return ds.toString();
   }
-  
+
   public static void main(String[] args) {
     NodeList list=new NodeList();
     for (int i=0; i<8; i++)
       list.add(new NodeStatic(""+i));
-    System.out.println(list); 
-    
+    System.out.println(list);
+
     NodeList list2=new NodeList();
     for (int i=0; i<3; i++)
       list2.add(new NodeStatic("2new"+i));
-    
+
     list.remove(2);
     System.out.println(list.add(2, list2));
-    System.out.println(list); 
+    System.out.println(list);
   }
 }

@@ -20,12 +20,12 @@ import org.tmotte.tmplz.load.TextLoaderFactory;
 import org.tmotte.tmplz.util.Log;
 import org.tmotte.common.io.Loader;
 
-/** 
+/**
  * Loads text from a URL. Since caching behavior is important, several things should be understood:
  * This last-modified timestamp returned by URLTextLoader.get() is the value of System.currentTimeMillis()
  * when the last change was detected. It is NOT the value of any timestamp reported by the URL's source.
  * Nonetheless URLTextLoader will negotiate with the URL source using last-modified timestamps
- * as a "validator" to detect changes. 
+ * as a "validator" to detect changes.
  */
 public class URLTextLoader implements TextLoader {
   private boolean brokenZip=false;
@@ -33,7 +33,7 @@ public class URLTextLoader implements TextLoader {
   protected URI uri;
   protected long sourceLastModified=-1;
   protected Proxy proxy;//FIXLATER use of proxy not tested
-  
+
   public URLTextLoader(URL url){
     this(url, null, false);
   }
@@ -58,8 +58,8 @@ public class URLTextLoader implements TextLoader {
     }
     this.proxy=proxy;
   }
-  
-  
+
+
 
   /**
    * Because it uses URL/URI's, this class can ask its URL/URI
@@ -67,7 +67,8 @@ public class URLTextLoader implements TextLoader {
    * <ol>
    *  <li>Paths containing a ":" are assumed to be absolute, in which case null is returned.
    *  <li>Paths containing a " " character are converted such that " " is replaced with "%20".
-   * @see java.net.URI#resolve(String) 
+   * </ol>
+   * @see java.net.URI#resolve(String)
    */
   public Path getAbsolutePath(String relativePath){
     //Log.finest("URLTextLoader.getAbsolutePath(): relativePath="+relativePath);
@@ -87,12 +88,12 @@ public class URLTextLoader implements TextLoader {
     }
     return null;
   }
-  
+
 
   ////////////////////////
   // INTERFACE METHODS: //
   ////////////////////////
-  
+
   /**
    * Checks its source for changes. Fulfills <code>TextLoader.check()</code> interface method.
    */
@@ -103,11 +104,11 @@ public class URLTextLoader implements TextLoader {
         throw new InternalException("URI is null");
       if (url==null)
         throw new InternalException("URL is null");
-      URLConnection connection=proxy==null 
+      URLConnection connection=proxy==null
         ?url.openConnection()
         :url.openConnection(proxy);
       connection.setUseCaches(false);
-      
+
       //If our client is up-to-date with us, we'll ask the source
       //to only return content if we don't have it.
       if (sourceLastModified>0)
@@ -125,7 +126,7 @@ public class URLTextLoader implements TextLoader {
 
       //There is a java bug where Last Modified comes out zero if there
       //was a 304, but at this point we know there wasn't. We will get a 0
-      //if last modified wasn't supported, or perhaps a -1. 
+      //if last modified wasn't supported, or perhaps a -1.
       long newSourceLastModified=connection.getLastModified();
       //Log.finest("URLTextLoader.check(): "+url+" Last modified: "+newSourceLastModified);
       if (newSourceLastModified>0 && newSourceLastModified==sourceLastModified){
@@ -136,7 +137,7 @@ public class URLTextLoader implements TextLoader {
       sourceLastModified=newSourceLastModified;
       Log.finest("URLTextLoader.check(): detected change to "+url+" last modified: "+newSourceLastModified);
 
-      
+
       //Now get the content. Note that we do one more check to make
       //sure it really changed:
       int len=connection.getContentLength();
@@ -149,12 +150,12 @@ public class URLTextLoader implements TextLoader {
     } catch (Exception e) {
       throw new CannotLoadURLException(url, e);
     }
-      
-  }    
 
-  /** 
-   * This will be invoked by <code>check()</code> when new text is found. Override this method to do your 
-   * own check to see if the content really changed 
+  }
+
+  /**
+   * This will be invoked by <code>check()</code> when new text is found. Override this method to do your
+   * own check to see if the content really changed
    * enough to warrant returning text. If changed() returns false, <code>check()</code> will return null.
    * @return The default behavior is to always return true.
    */

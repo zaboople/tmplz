@@ -3,7 +3,7 @@ import java.util.regex.*;
 
 /**
  * Provides the ability to &quot;walk&quot; through a String
- * using <code>find()</code> methods, parsing found &quot;chunks&quot; one at a time. 
+ * using <code>find()</code> methods, parsing found &quot;chunks&quot; one at a time.
  * Interally, there is a text buffer and a pointer to a position in that buffer;
  * the pointer moves as <code>find()</code> executes.
  */
@@ -20,8 +20,8 @@ public class StringChunker{
   // PSEUDO-CONSTRUCTORS: //
   //////////////////////////
 
-  /** 
-   * Creates a StringChunker ready to use. 
+  /**
+   * Creates a StringChunker ready to use.
    * @param text The String to be parsed.
    */
   public StringChunker(String text){
@@ -62,7 +62,7 @@ public class StringChunker{
   // BASIC PROPERTIES: //
   ///////////////////////
 
-  /** 
+  /**
    * @return The entire internal buffer
    */
   public String getText(){
@@ -72,8 +72,8 @@ public class StringChunker{
   ////////////////////////////
   // INDEX STATE RETRIEVAL: //
   ////////////////////////////
-  
-  /** 
+
+  /**
    * @return The current index into the internal buffer.
    *   When getRest() is invoked, this will be the
    *   buffer length.
@@ -81,7 +81,7 @@ public class StringChunker{
   public int getIndex(){
     return index;
   }
-  /** 
+  /**
    * @return The index of where the last find() found
    *   something.
    */
@@ -94,7 +94,7 @@ public class StringChunker{
    */
   public boolean finished(){
     return index>=text.length();
-  }  
+  }
 
   /////////////////////////
   // INDEX MANIPULATION: //
@@ -112,21 +112,21 @@ public class StringChunker{
   ///////////////////
   // FIND METHODS: //
   ///////////////////
-  
-  /** 
+
+  /**
    * Finds the given substring, starting at the current index, and sets
    * the internal index to the location directly following the text found.
    * Invoke getUpTo(), getIncluding(), getFound() etc. to retrieve
    * the text found and text relative to its location.
-   * @return true if lookFor was located. 
-   */    
+   * @return true if lookFor was located.
+   */
   public boolean find(String lookFor) {
     upTo=null;
     found=null;
     if (!rangeCheck())
       return false;
-    else {      
-      foundAt=text.indexOf(lookFor, index);      
+    else {
+      foundAt=text.indexOf(lookFor, index);
       if (foundAt<0) {
         upTo=null;
         found=null;
@@ -138,12 +138,12 @@ public class StringChunker{
       }
       return foundAt > -1;
     }
-  } 
+  }
   /**
    * Makes it easier to deal with end-of-String vs. text-found conditions in loops.
-   * @return true if lookFor is found, or if  
+   * @return true if lookFor is found, or if
    * not found but the internal index was still before the end of the
-   * text. In the latter case, the next call to getUpTo() will return 
+   * text. In the latter case, the next call to getUpTo() will return
    * the remaining text, and further calls to findOrFinish() will return false.
    */
   public boolean findOrFinish(String lookFor) {
@@ -168,8 +168,8 @@ public class StringChunker{
     foundAt=-1;
     if (!rangeCheck())
       return false;
-    else {    
-      Matcher matcher=regex.matcher(text);      
+    else {
+      Matcher matcher=regex.matcher(text);
       boolean worked=matcher.find(index);
       if (worked) {
         foundAt=matcher.start();
@@ -201,35 +201,35 @@ public class StringChunker{
     }
   }
 
-  
+
   ////////////////////////
   // "CHUNK" RETRIEVAL: //
   ////////////////////////
-  
-  /** 
+
+  /**
    * Obtains the text <i>before</i> the text found by <code>find()</code>.
-   * @return The text between text found by the last successful find() and the successful 
-   *   find() before that; or, if there has been only one successful find(), the text between 
-   *   position 0 and the text found by that find(). 
+   * @return The text between text found by the last successful find() and the successful
+   *   find() before that; or, if there has been only one successful find(), the text between
+   *   position 0 and the text found by that find().
    */
   public String getUpTo(){
     return upTo;
   }
-  /** 
+  /**
    * Obtains the text that was found by <code>find()</code>.
-   * @return text located during last execution of find() 
+   * @return text located during last execution of find()
    */
   public String getFound() {
     return found;
   }
-  /** 
-   * Combines the results of <code>getUpTo()</code. and <code>getFound()</code>.
-   * @return getUpTo() + getFound() 
+  /**
+   * Combines the results of <code>getUpTo()</code>. and <code>getFound()</code>.
+   * @return getUpTo() + getFound()
    */
   public String getIncluding(){
     return getUpTo()+getFound();
   }
-  /** 
+  /**
    * Provides all the text up to the current position of the internal pointer; i.e. everything
    * up to and <i>including</i> the last item found.
    */
@@ -238,12 +238,12 @@ public class StringChunker{
     getEverythingSoFar(sb);
     return sb.toString();
   }
-  private void getEverythingSoFar(StringBuffer sb){    
+  private void getEverythingSoFar(StringBuffer sb){
     if (parentChunker!=null)
       parentChunker.getEverythingSoFar(sb);
     sb.append(
       finished() ?text :text.substring(0, index)
-    );    
+    );
   }
 
   ////////////////////////////
@@ -251,25 +251,25 @@ public class StringChunker{
   // STATE RETRIEVAL:       //
   ////////////////////////////
 
-  /** 
-   * Combines find() and getUpTo(). 
-   * @return text located during the find() 
+  /**
+   * Combines find() and getUpTo().
+   * @return text located during the find()
    */
   public String getUpTo(String lookFor) {
     find(lookFor);
     return getUpTo();
   }
-  /** 
-   * Combines find() and getIncluding(). 
-   * @return text located during the find() 
+  /**
+   * Combines find() and getIncluding().
+   * @return text located during the find()
    */
   public String getIncluding(String lookFor) {
     find(lookFor);
     return getIncluding();
   }
-  /**  
+  /**
    * Moves index to end of buffer and retrieves rest of text.
-   * @return Remainder of buffer, or "" if nothing is left. 
+   * @return Remainder of buffer, or "" if nothing is left.
    */
   public String getRest(){
     if (finished())
@@ -280,7 +280,7 @@ public class StringChunker{
       return result;
     }
   }
-  /** 
+  /**
    * If last find() failed, invokes getRest(), else getUpTo().
    */
   public String getUpToOrGetRest(){
@@ -289,8 +289,8 @@ public class StringChunker{
     else
       return upTo;
   }
-  /** 
-   * Combines find() with getUpToOrGetRest(). 
+  /**
+   * Combines find() with getUpToOrGetRest().
    */
   public String getUpToOrGetRest(String val){
     find(val);
@@ -303,8 +303,8 @@ public class StringChunker{
   ////////////////
 
   private boolean rangeCheck(){
-    return text!=null && index<text.length();    
-  } 
+    return text!=null && index<text.length();
+  }
 
 
   ///////////////////
@@ -331,7 +331,7 @@ public class StringChunker{
       rip("upto:", sc.getUpTo());
       rip("found:", sc.getFound());
     }
-  }  
+  }
 
   private static void rip(String s1, String s2){
     System.out.println(s1+">"+s2+"<");

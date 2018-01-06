@@ -27,10 +27,9 @@ import org.tmotte.tmplz.exception.load.DependencyCheckException;
  *    for changes when this template is checked for changes.
  * <li>Maintains a last-modified timestamp for the template, as the maximum timestamp of the main template and everything it Includes.
  * </ul>
- * </p>
- * <p>FixLater: move to load package.</p>
  */
 public class TextSource {
+  //FixLater: move to load package.
   private long allLastModified=0;
   private long myLastModified=0;
   private long etag=0;
@@ -45,17 +44,17 @@ public class TextSource {
   ////////////
   // SETUP: //
   ////////////
-  
+
   public TextSource(TextLoader textLoader, TextLoadMgr textLoadMgr, Path path){
     this.textLoader=textLoader;
     this.textLoadMgr=textLoadMgr;
     this.path=path;
   }
-  
+
   ////////////////////////
   // PROPERTY GET/SETS: //
   ////////////////////////
-  
+
   public Exception getError() {
     return failed;
   }
@@ -79,7 +78,7 @@ public class TextSource {
   ////////////
   // RESET: //
   ////////////
-  
+
   /** Invoked by TemplateBuilder */
   public synchronized void resetOnError() {
     resetDependencies();
@@ -88,7 +87,7 @@ public class TextSource {
     changed();
     //Can't lose my own last modified or text
     //because I can't reload, gotta hang on to it.
-    allLastModified=myLastModified;                                   
+    allLastModified=myLastModified;
   }
   private synchronized void reset() {
     changed();
@@ -103,14 +102,14 @@ public class TextSource {
     if (depLoaderMap!=null)
       depLoaderMap.clear();
   }
-  
-   
+
+
   //////////////////
   // Dependency: //
   //////////////////
 
   /** This is used by the Preprocessor */
-  public synchronized TextSource getInThisContext(String anotherPath, Set<TextSource> parents) throws Exception {    
+  public synchronized TextSource getInThisContext(String anotherPath, Set<TextSource> parents) throws Exception {
     if (depLoaderMap==null)
       depLoaderMap=new HashMap<String,TextSource>();
     TextSource d=(TextSource)depLoaderMap.get(anotherPath);
@@ -138,7 +137,7 @@ public class TextSource {
   /**
    * The "parents" used here is different from the one used in getInThisContext(). This one
    * is just used to prevent a stack overflow when we have a child in our dependency map
-   * and it (or a child of it) has us in its own dependency map. An actual circular 
+   * and it (or a child of it) has us in its own dependency map. An actual circular
    * include will be detected by getInThisContext().
    */
   Set<TextSource> spareAlreadyChecker;
@@ -161,7 +160,7 @@ public class TextSource {
   private synchronized void checkDependencies(Set<TextSource> already) {
     if (depLoaderMap!=null && !depLoaderMap.isEmpty()) {
       for (TextSource ts: depLoaderMap.values()){
-        if (!already.contains(ts)) 
+        if (!already.contains(ts))
           try {
             ts.check(already);
           } catch (Exception e) {
@@ -181,7 +180,7 @@ public class TextSource {
       }
       already.add(this);
     }
-    try {  
+    try {
       String newText=textLoader.check();
       if (newText!=null){
         reset();
@@ -200,16 +199,16 @@ public class TextSource {
       throw e;
     }
   }
-  
-  
+
+
   ///////////////////////////
   // LAST MODIFIED & ETAG: //
   ///////////////////////////
-  
+
   private synchronized void setLastModified(long possible) {
     if (possible>allLastModified){
       Log.finest("TextSource", "check()", "Detected change for "+path+" last mod "+possible);
-      allLastModified=possible;    
+      allLastModified=possible;
     }
   }
   synchronized long getLastModified() {
@@ -227,7 +226,7 @@ public class TextSource {
   //////////
   // ETC: //
   //////////
-  
+
   public String toString() {
     return path.toString();
   }

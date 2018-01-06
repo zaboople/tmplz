@@ -15,11 +15,11 @@ import org.tmotte.tmplz.util.TemplateInterceptor;
 
 /**
  * This holds the current version of a template. TemplateSource really could be combined with TextSource to
- * simplify the code, even though TextSource instances do not always correspond to a template/Section instance 
+ * simplify the code, even though TextSource instances do not always correspond to a template/Section instance
  * (included templates do not need to be parsed into actual Section instances).
  */
 public class TemplateSource {
-  
+
   private Section baseTemplate=CatNodeSection.createTemplate();
   private TextSource textSource;
   private TemplateBuilder templateBuilder;
@@ -31,9 +31,9 @@ public class TemplateSource {
   ////////////////////
   // INITIALIZATION //
   ////////////////////
-  
+
   public TemplateSource(
-      TextSource textSource, 
+      TextSource textSource,
       TemplateBuilder templateBuilder,
       ObjectFormatter objFormatter,
       TemplateInterceptor interceptor
@@ -47,12 +47,14 @@ public class TemplateSource {
   ////////////////////
   // GET() METHODS: //
   ////////////////////
-  
-  /** 
-   * Gets a thread-safe, up-to-date template instance.<br/>
-   * 1) If checkForChanges==true, checks the template's source to find out 
-   *    if the template source has changed and rebuilds as necessary.<br/>
-   * 2) Makes a copy of the internal template and returns it.    
+
+  /**
+   * Gets a thread-safe, up-to-date template instance:
+   * <ol>
+   * <li> If checkForChanges==true, checks the template's source to find out
+   *    if the template source has changed and rebuilds as necessary.
+   * <li> Makes a copy of the internal template and returns it.
+   * </ol>
    */
   public Section getTemplate(boolean checkForChanges) {
     if (checkForChanges || lastModified==-2)
@@ -61,12 +63,12 @@ public class TemplateSource {
     template.setTemplateInterceptor(interceptor);
     return template;
   }
-  
+
   ////////////
   //  LOAD  //
   ////////////
-  
-  /** 
+
+  /**
    * @return true if the underlying content changed.
    */
   public synchronized boolean check(){
@@ -84,12 +86,12 @@ public class TemplateSource {
       return true;
     }
     return false;
-  }  
+  }
   public synchronized long getLastModified(){
     return lastModified;
   }
   public synchronized long getETag(){
     return etag;
   }
-  
+
 }
