@@ -14,11 +14,11 @@ To build Tmplz you need a reasonable Java installation (1.7 or later) and Apache
 [Download a zip file of jar files & javadocs here](https://zaboople.github.io/downloads/Tmplz.1.2.1.zip)
 
 ## Documentation
-[API Javadocs](https://zaboople.github.io/javadoc/tmplz/overview-summary.html)
-
 [API Overview](https://zaboople.github.io/pages/tmplz/gettingstarted/index.html)
 
-[Template tag system manual](https://zaboople.github.io/pages/tmplz/tagdocs/index.html)
+[Detailed API Javadocs](https://zaboople.github.io/javadoc/tmplz/overview-summary.html)
+
+[Template tag manual](https://zaboople.github.io/pages/tmplz/tagdocs/index.html)
 
 
 
