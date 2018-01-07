@@ -10,7 +10,13 @@ Tmplz is written in Java and has a very simple API. The markup language is fully
 
 To build Tmplz you need a reasonable Java installation (1.7 or later) and Apache Ant. Run `ant dist` to obtain a full distribution; documentation will be in dist/bin/docs.
 
-## Download & Documentation
+## Download
+[Download a zip file of jar files & javadocs here](https://zaboople.github.io/downloads/Tmplz.1.2.1.zip)
 
-[Everything is on the main site](https://zaboople.github.io/pages/tmplz/index.html)
+## Documentation
+[API Javadocs](https://zaboople.github.io/javadoc/tmplz/overview-summary.html)
+[API Overview](https://zaboople.github.io/pages/tmplz/gettingstarted/index.html)
+[Template tag system manual](https://zaboople.github.io/pages/tmplz/tagdocs/index.html)
+
+
 
